@@ -1,0 +1,79 @@
+{
+    "name": "slotjs",
+    "version": "1.0.0",
+    "description": "🎰 Circular slot machine built with JavaScript.",
+    "homepage": "https://github.com/Danziger/slotjs#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Danziger/slotjs.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Danziger/slotjs/issues"
+    },
+    "author": {
+        "name": "Daniel Gámez Franco",
+        "email": "gmzcodes@outlook.com",
+        "url": "http://gmzcodes.com"
+    },
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "start": "node_modules/.bin/webpack-dev-server --mode development --hot --display-error-details --progress",
+        "eslint": "node_modules/.bin/eslint src",
+        "eslint:fix": "node_modules/.bin/eslint --fix src",
+        "stylelint": "node_modules/.bin/stylelint src",
+        "stylelint:fix": "node_modules/.bin/stylelint --fix src",
+        "build:dev": "node_modules/.bin/webpack --mode development --display-error-details --progress",
+        "build:prod": "node_modules/.bin/webpack --mode production --display-error-details --progress",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "clean": "npm run distclean && npm run nodeclean",
+        "distclean": "rm -rf dist",
+        "nodeclean": "rm -rf node_modules"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.2.5"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/plugin-proposal-class-properties": "^7.2.3",
+        "@babel/preset-env": "^7.2.3",
+        "autoprefixer": "^9.4.3",
+        "babel-eslint": "^10.0.1",
+        "babel-loader": "^8.0.4",
+        "copy-webpack-plugin": "^4.6.0",
+        "css-loader": "^2.1.0",
+        "eslint": "^5.11.1",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-loader": "^2.1.1",
+        "eslint-plugin-babel": "^5.3.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-react": "^7.12.0",
+        "html-loader": "^0.5.5",
+        "html-webpack-plugin": "^3.2.0",
+        "mini-css-extract-plugin": "^0.5.0",
+        "node-sass": "^4.11.0",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^7.1.0",
+        "stylelint": "^9.9.0",
+        "stylelint-config-airbnb": "0.0.0",
+        "stylelint-order": "^2.0.0",
+        "stylelint-scss": "^3.4.4",
+        "stylelint-webpack-plugin": "^0.10.5",
+        "webpack": "^4.28.2",
+        "webpack-cli": "^3.1.2",
+        "webpack-dev-server": "^3.1.14"
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 0.5%",
+        "last 2 version",
+        "Firefox ESR",
+        "not dead",
+        "iOS >= 9"
+    ]
+}
