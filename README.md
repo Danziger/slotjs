@@ -3,6 +3,8 @@ SlotJS
 
 Circular slot machine built with JavaScript and Emojis!
 
+https://danziger.github.io/slotjs
+
 
 Running It (Development)
 ------------------------
