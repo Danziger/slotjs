@@ -33,6 +33,8 @@ TODO
 
 - Fix favicon.
 
+- Improve layout/responsiveness and add title, coins and footer.
+
 
 Limitations & Possible Improvements
 -----------------------------------
