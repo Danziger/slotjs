@@ -31,7 +31,7 @@ export class SlotMachine {
     constructor() {
         this.init();
 
-        if (window || IS_IOS) {
+        if (IS_IOS) {
             let tap = false;
 
             document.ontouchstart = () => { tap = true; };
