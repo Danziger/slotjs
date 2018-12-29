@@ -1,21 +1,20 @@
-<section align="center">
+<h1 align="center">SlotJS</h1>
 
-SlotJS
-======
+<p align="center">
+    🎰 Circular slot machine mobile-first SPA built using JavaScript, CSS variables and Emojis!
+</p><p align="center">
+    Try it out! 👉 https://danziger.github.io/slotjs
+</p><p align="center">
+    🔊 Better with sound on.
+</p><p align="center">
+    📱 Android only.
+</p>
 
-🎰 Circular slot machine mobile-first SPA built using JavaScript, CSS variables and Emojis!
-
-Try it out! 👉 https://danziger.github.io/slotjs
-
-🔊 Better with sound on.
-
-📱 Android only.
-
-<a href="https://danziger.github.io/slotjs" target="_blank">
-    <img src="./screenshots/slotjs.png" width="512" />
-</a>
-
-</section>
+<p align="center">
+    <a href="https://danziger.github.io/slotjs" target="_blank">
+        <img src="./screenshots/slotjs.png" width="512" />
+    </a>
+</p>
 
 <br /><hr /><br />
 
