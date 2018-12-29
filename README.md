@@ -15,8 +15,6 @@ Take a look at `package.json`, the scripts are self-explanatory.
 TODO
 ----
 
-- Publish to GitHub Pages.
-
 - Initialize CSS variables from JS.
 
 - Create a `SoundService` class and add sounds.

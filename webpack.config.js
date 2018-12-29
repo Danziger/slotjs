@@ -11,7 +11,7 @@ const pkg = require('./package.json');
 const htmlWebPackPlugin = new HtmlWebPackPlugin({
     filename: path.resolve(__dirname, 'dist/index.html'),
     template: path.resolve(__dirname, 'src/app/templates/index.html'),
-    title: `${ pkg.name.toUpperCase() } / ${ pkg.description }`,
+    title: `SlotJS / ${ pkg.description }`,
     meta: {
         author: pkg.author.name,
         description: pkg.description,
