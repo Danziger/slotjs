@@ -19,16 +19,17 @@
     "main": "index.js",
     "scripts": {
         "start": "node_modules/.bin/webpack-dev-server --mode development --hot --display-error-details --progress",
+        "build": "npm run build:prod",
+        "build:dev": "node_modules/.bin/webpack --mode development --display-error-details --progress",
+        "build:prod": "node_modules/.bin/webpack --mode production --display-error-details --progress",
         "eslint": "node_modules/.bin/eslint src",
         "eslint:fix": "node_modules/.bin/eslint --fix src",
         "stylelint": "node_modules/.bin/stylelint src",
         "stylelint:fix": "node_modules/.bin/stylelint --fix src",
-        "build:dev": "node_modules/.bin/webpack --mode development --display-error-details --progress",
-        "build:prod": "node_modules/.bin/webpack --mode production --display-error-details --progress",
-        "test": "echo \"Error: no test specified\" && exit 1",
         "clean": "npm run distclean && npm run nodeclean",
         "distclean": "rm -rf dist",
-        "nodeclean": "rm -rf node_modules"
+        "nodeclean": "rm -rf node_modules",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
         "@babel/polyfill": "^7.2.5"
