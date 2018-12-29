@@ -7,6 +7,8 @@ Circular slot machine built with JavaScript and Emojis!
 
 🔊 Better with sound on!
 
+📱 Android only.
+
 
 Running It (Development)
 ------------------------
