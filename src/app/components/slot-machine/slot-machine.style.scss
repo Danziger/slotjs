@@ -91,11 +91,11 @@
 
         &--background {
             z-index: -1;
-            box-shadow: 0 -3px 0 -1px magenta;
+            // Not actually used.
         }
 
         &--shadow {
-            box-shadow: 0 16px 32px -4px rgba(0,0,0,.25), 0 -3px 0 -1px rgba(magenta, .5);
+            box-shadow: 0 16px 32px -4px rgba(0,0,0,.25);
             border-radius: 0 0 2px 2px; // Bottom only
         }
     }

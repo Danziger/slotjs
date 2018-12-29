@@ -17,8 +17,6 @@ Take a look at `package.json`, the scripts are self-explanatory.
 TODO
 ----
 
-- Initialize CSS variables from JS.
-
 - Create a `SoundService` class and add sounds.
 
 - Check win.
@@ -30,8 +28,6 @@ TODO
 - Keep track of coins.
 
 - Handle code TODOs.
-
-- Fix favicon.
 
 - Improve layout/responsiveness and add title, coins and footer.
 
