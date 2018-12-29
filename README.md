@@ -7,7 +7,7 @@
 </p><p align="center">
     🔊 Better with sound on.
 </p><p align="center">
-    📱 Android only.
+    📱 Android (and desktop) only.
 </p>
 
 <p align="center">
