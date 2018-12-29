@@ -18,7 +18,7 @@ export class SlotMachine {
     reels = [];
 
     // Visual config:
-    shadows = [4, 3, 3, 2, 1];
+    shadows = [4, 3, 2, 1, 0]; // TODO: Calculate dynamically...
     symbols = [...SYMBOLS_RANDOM];
     alpha = 360 / SYMBOLS_RANDOM.length;
 
@@ -31,10 +31,15 @@ export class SlotMachine {
         this.init();
 
         document.onclick = this.handleClick.bind(this);
+        window.onresize = this.handleResize.bind(this);
     }
 
     init() {
         const { alpha, shadows, symbols } = this;
+
+        this.resize();
+
+        // TODO: Create reels with JS!
 
         this.reels = Array
             .from(document.querySelectorAll(SlotMachine.SELECTOR_REEL))
@@ -64,13 +69,19 @@ export class SlotMachine {
             });
     }
 
+    resize() {
+        const size = this.size = Math.floor((Math.min(window.innerWidth, window.innerHeight) - 96) / 11);
+
+        this.root.style.setProperty('--size', `${ size }px`);
+    }
+
     start() {
         const { reels, root } = this;
 
         resetAnimations();
 
         reels.map(reel => reel.element.classList.remove('is-stop'));
-        root.style = '';
+        root.style.transform = '';
 
         this.currentReel = 0;
         this.lastUpdate = performance.now();
@@ -82,9 +93,7 @@ export class SlotMachine {
 
     stop() {
         this.currentReel = null;
-
-        // TODO: 32 is a css variable!
-        this.root.style.transform = `scale(${ (window.innerWidth - 32) / this.display.offsetWidth })`;
+        this.root.style.transform = `scale(${ this.root.offsetWidth / this.display.offsetWidth })`;
 
         // TODO: Check win
     }
@@ -147,6 +156,10 @@ export class SlotMachine {
                 this.stop();
             }
         }
+    }
+
+    handleResize() {
+        requestAnimationFrame(() => this.resize());
     }
 
 }

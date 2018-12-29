@@ -1,7 +1,7 @@
 {
     "name": "slotjs",
     "version": "1.0.0",
-    "description": "Circular slot machine built with JavaScript and Emojis!",
+    "description": "Circular slot machine mobile-first SPA built using JavaScript, CSS variables and Emojis!",
     "homepage": "https://github.com/Danziger/slotjs#readme",
     "repository": {
         "type": "git",

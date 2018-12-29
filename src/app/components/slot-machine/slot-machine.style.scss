@@ -1,16 +1,15 @@
 .sm {
 
     &__base {
-        --margin: 32px;
         --size: 32px;
         --bg: transparent;
         --reels: 5;
 
         position: relative;
-        width: calc(100% - var(--margin));
-        height: calc(100vh - var(--margin));
-        max-height: calc(100vw - var(--margin));
-        max-width: calc(100vh - var(--margin));
+        width: calc(100% - var(--size));
+        height: calc(100vh - var(--size));
+        max-height: calc(100vw - var(--size));
+        max-width: calc(100vh - var(--size));
         box-sizing: border-box;
         pointer-events: none;
         transform-origin: left center;
@@ -33,7 +32,7 @@
         background: var(--bg);
         border-radius: 100%;
         overflow: hidden;
-        box-shadow: 0 0 32px 0 rgba(0,0,0,.125);
+        box-shadow: 0 0 var(--size) 0 rgba(0,0,0,.125);
         will-change: transform;
 
         &:first-child,
@@ -95,7 +94,7 @@
         }
 
         &--shadow {
-            box-shadow: 0 16px 32px -4px rgba(0,0,0,.25);
+            box-shadow: 0 calc(var(--size) / 2) var(--size) calc(var(--size) / -8) rgba(0,0,0,.25);
             border-radius: 0 0 2px 2px; // Bottom only
         }
     }

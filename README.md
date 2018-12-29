@@ -1,7 +1,7 @@
 SlotJS
 ======
 
-Circular slot machine built with JavaScript and Emojis!
+Circular slot machine mobile-first SPA built using JavaScript, CSS variables and Emojis!
 
 👉 Try it out at https://danziger.github.io/slotjs.
 
@@ -21,6 +21,8 @@ TODO
 
 - Create a `SoundService` class and add sounds.
 
+- Create reels' HTML from JS.
+
 - Check win.
 
 - Hide (fade) shadows using CSS animations.
@@ -31,7 +33,7 @@ TODO
 
 - Handle code TODOs.
 
-- Improve layout/responsiveness and add title, coins and footer.
+- Add title, coins and footer.
 
 
 Limitations & Possible Improvements

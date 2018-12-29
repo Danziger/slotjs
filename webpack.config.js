@@ -28,7 +28,6 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
         publicPath: '/slotjs/',
-        https: true,
     },
 
     module: {
