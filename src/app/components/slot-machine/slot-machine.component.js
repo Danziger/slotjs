@@ -2,6 +2,7 @@ import { createElement } from '../../utils/dom.util';
 import { stopAt, resetAnimations } from '../../utils/animation.util';
 import { shuffle } from '../../utils/array.util';
 import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
+import { VIBRATION_START, VIBRATION_STOP } from '../../constants/vibration.constants';
 
 import './slot-machine.style.scss';
 
@@ -43,7 +44,7 @@ export class SlotMachine {
 
                 symbols.forEach((symbol, isymbol) => {
                     const slotText = createElement('sm__cellFigure', symbol);
-                    const slot = createElement('sm__cell', slotText.cloneNode(true), isymbol * alpha);
+                    const slot = createElement('sm__cell', slotText, isymbol * alpha);
 
                     reel.appendChild(slot);
 
@@ -74,7 +75,7 @@ export class SlotMachine {
         this.currentReel = 0;
         this.lastUpdate = performance.now();
 
-        window.navigator.vibrate([50, 50, 50, 50, 50, 50, 25, 25, 25, 25, 25, 25, 25, 25].reverse());
+        window.navigator.vibrate(VIBRATION_START);
 
         requestAnimationFrame(() => this.tick());
     }
@@ -126,7 +127,7 @@ export class SlotMachine {
             speed,
         ) * 5;
 
-        window.navigator.vibrate([200, 50, 50, 50, 50, 25, 25, 25, 25, 25, 25, 25, 25]);
+        window.navigator.vibrate(VIBRATION_STOP);
 
         reel.style.animation = `${ animationName } ${ animationDuration }ms ease-out forwards`;
         reel.element.classList.add('is-stop');
