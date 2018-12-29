@@ -1,4 +1,4 @@
-<center>
+<section align="center">
 
 SlotJS
 ======
@@ -15,7 +15,7 @@ Try it out! 👉 https://danziger.github.io/slotjs
     <img src="./screenshots/slotjs.png" width="512" />
 </a>
 
-</center>
+</section>
 
 <br /><hr /><br />
 
