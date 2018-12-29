@@ -10,6 +10,26 @@ Running It (Development)
 Take a look at `package.json`, the scripts are self-explanatory.
 
 
+TODO
+----
+
+- Publish to GitHub Pages.
+
+- Initialize CSS variables from JS.
+
+- Create a `SoundService` class and add sounds.
+
+- Check win.
+
+- Hide (fade) shadows using CSS animations.
+
+- Blur (fade) shadows using the `style` attribute instead of the `shadow-N` classes.
+
+- Keep track of coins.
+
+- Handle code TODOs
+
+
 Limitations & Possible Improvements
 -----------------------------------
 
