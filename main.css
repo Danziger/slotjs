@@ -90,9 +90,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  overflow: hidden; }
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; }
 
