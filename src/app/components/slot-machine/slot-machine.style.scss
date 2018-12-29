@@ -1,0 +1,101 @@
+.sm {
+
+    &__base {
+        --margin: 32px;
+        --size: 32px;
+        --bg: transparent;
+        --reels: 5;
+
+        position: relative;
+        width: calc(100% - var(--margin));
+        height: calc(100vh - var(--margin));
+        max-height: calc(100vw - var(--margin));
+        max-width: calc(100vh - var(--margin));
+        box-sizing: border-box;
+        pointer-events: none;
+        transform-origin: left center;
+        transition: transform ease-in-out 500ms 250ms;
+        will-change: transform;
+    }
+
+    &__activeReels {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__reel {
+        position: absolute;
+        top: calc( var(--i) * var(--size));
+        left: calc( var(--i) * var(--size));
+        width: calc(100% - var(--i) * 2 * var(--size));
+        height: calc(100% - var(--i) * 2 * var(--size));
+        background: var(--bg);
+        border-radius: 100%;
+        overflow: hidden;
+        box-shadow: 0 0 32px 0 rgba(0,0,0,.125);
+        will-change: transform;
+
+        &:first-child,
+        &:last-child {
+            box-shadow: none;
+        }
+    }
+
+    &__cell {
+        position: absolute;
+        height: var(--size);
+        line-height: var(--size);
+        top: 50%;
+        left: 0;
+        width: 50%;
+        margin-top: calc(var(--size) / -2);
+        transform-origin: center right;
+    }
+
+    &__shadow {
+        filter: blur(2px);
+        transition: opacity linear .125s;
+
+        // TODO: These could be calculated dynamically with JS:
+
+        &-1 { opacity: .5; }
+
+        &-2 { opacity: .4; }
+
+        &-3 { opacity: .3; }
+
+        &-4 { opacity: .2; }
+
+        &-5 { opacity: .1; }
+
+        .is-stop & {
+            opacity: 0;
+        }
+    }
+
+    &__cellFigure {
+        display: inline-block;
+        text-align: center;
+        width: var(--size);
+    }
+
+    &__display {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: calc(var(--reels) * var(--size));
+        height: var(--size);
+        margin-top: calc(var(--size) / -2);
+
+        &--background {
+            z-index: -1;
+            border-top: 3px solid yellow;
+        }
+
+        &--shadow {
+            box-shadow: 0 16px 32px -4px rgba(0,0,0,.25);
+            border-radius: 2px;
+        }
+    }
+}

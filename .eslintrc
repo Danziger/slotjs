@@ -37,7 +37,8 @@
         "linebreak-style": [2, "windows"],
         "prefer-destructuring": [2, {
             "array": false
-        }]
+        }],
+        "object-curly-newline": [2, { "multiline": true, "consistent": true }]
     },
     "plugins": [
         "babel"
