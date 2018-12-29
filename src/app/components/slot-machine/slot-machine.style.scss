@@ -46,6 +46,7 @@
         position: absolute;
         height: var(--size);
         line-height: var(--size);
+        font-size: calc(var(--size) / 2);
         top: 50%;
         left: 0;
         width: 50%;
@@ -90,12 +91,12 @@
 
         &--background {
             z-index: -1;
-            border-top: 3px solid yellow;
+            box-shadow: 0 -3px 0 -1px magenta;
         }
 
         &--shadow {
-            box-shadow: 0 16px 32px -4px rgba(0,0,0,.25);
-            border-radius: 2px;
+            box-shadow: 0 16px 32px -4px rgba(0,0,0,.25), 0 -3px 0 -1px rgba(magenta, .5);
+            border-radius: 0 0 2px 2px; // Bottom only
         }
     }
 }
