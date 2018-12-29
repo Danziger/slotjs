@@ -1,23 +1,13 @@
 const path = require('path');
 
 const webpack = require('webpack');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const pkg = require('./package.json');
-
-const htmlWebPackPlugin = new HtmlWebPackPlugin({
-    filename: path.resolve(__dirname, 'dist/index.html'),
-    template: path.resolve(__dirname, 'src/app/templates/index.html'),
-    title: `SlotJS / ${ pkg.description }`,
-    meta: {
-        author: pkg.author.name,
-        description: pkg.description,
-    },
-    // TODO: Use templateParameters if more options are required, but it will override all the above.
-});
 
 module.exports = {
     devtool: 'eval-source-map',
@@ -32,12 +22,13 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/slotjs/',
+        publicPath: './',
     },
 
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
         publicPath: '/slotjs/',
+        https: true,
     },
 
     module: {
@@ -69,7 +60,20 @@ module.exports = {
     },
 
     plugins: [
-        htmlWebPackPlugin,
+        new HtmlWebpackPlugin({
+            filename: path.resolve(__dirname, 'dist/index.html'),
+            template: path.resolve(__dirname, 'src/app/templates/index.html'),
+            title: `SlotJS / ${ pkg.description }`,
+            favicon: path.resolve(__dirname, 'static/favicon.ico'),
+            inlineSource: '.(js|css)$', // Inline JS and CSS.
+            meta: {
+
+                author: pkg.author.name,
+                description: pkg.description,
+            },
+            // We can use templateParameters if more options are required, but it will override all the above.
+        }),
+        new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
