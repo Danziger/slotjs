@@ -1,6 +1,7 @@
 import { createElement } from '../../utils/dom.util';
 import { stopAt, resetAnimations } from '../../utils/animation.util';
 import { shuffle } from '../../utils/array.util';
+import { IS_IOS } from '../../constants/browser.constants';
 import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
 import { VIBRATION_START, VIBRATION_STOP } from '../../constants/vibration.constants';
 
@@ -30,7 +31,15 @@ export class SlotMachine {
     constructor() {
         this.init();
 
-        document.onclick = this.handleClick.bind(this);
+        if (window || IS_IOS) {
+            let tap = false;
+
+            document.ontouchstart = () => { tap = true; };
+            document.ontouchmove = () => { tap = false; };
+            document.ontouchend = () => tap && this.handleClick();
+        } else {
+            document.onclick = this.handleClick.bind(this);
+        }
     }
 
     init() {
