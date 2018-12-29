@@ -3,7 +3,9 @@ SlotJS
 
 Circular slot machine built with JavaScript and Emojis!
 
-https://danziger.github.io/slotjs
+👉 Try it out at https://danziger.github.io/slotjs.
+
+🔊 Better with sound on!
 
 
 Running It (Development)
@@ -27,7 +29,9 @@ TODO
 
 - Keep track of coins.
 
-- Handle code TODOs
+- Handle code TODOs.
+
+- Fix favicon.
 
 
 Limitations & Possible Improvements
