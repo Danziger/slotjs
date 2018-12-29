@@ -16,7 +16,7 @@
     </a>
 </p>
 
-<br /><hr /><br />
+<hr /><br />
 
 Running It (Development)
 ------------------------
