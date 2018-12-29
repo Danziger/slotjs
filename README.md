@@ -19,8 +19,6 @@ Take a look at `package.json`, the scripts are self-explanatory.
 TODO
 ----
 
-- Create a `SoundService` class and add sounds.
-
 - Create reels' HTML from JS.
 
 - Check win.

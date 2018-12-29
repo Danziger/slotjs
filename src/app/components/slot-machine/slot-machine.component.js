@@ -3,6 +3,9 @@ import { stopAt, resetAnimations } from '../../utils/animation.util';
 import { shuffle } from '../../utils/array.util';
 import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
 import { VIBRATION_START, VIBRATION_STOP } from '../../constants/vibration.constants';
+import { BlipSoundService } from '../../services/sound/blip/blip-sound.service';
+import { StopSoundService } from '../../services/sound/stop/stop-sound.service';
+import { UnluckySoundService } from '../../services/sound/unlucky/unlucky-sound.service';
 
 import './slot-machine.style.scss';
 
@@ -26,6 +29,7 @@ export class SlotMachine {
     currentReel = null;
     speed = -0.75;
     lastUpdate = 0;
+    blipCounter = 0;
 
     constructor() {
         this.init();
@@ -96,6 +100,8 @@ export class SlotMachine {
         this.root.style.transform = `scale(${ this.root.offsetWidth / this.display.offsetWidth })`;
 
         // TODO: Check win
+
+        UnluckySoundService.play();
     }
 
     tick() {
@@ -106,6 +112,12 @@ export class SlotMachine {
 
         if (currentReel === null) {
             return;
+        }
+
+        const blipCounter = this.blipCounter = (this.blipCounter + 1) % 4;
+
+        if (blipCounter === 0) {
+            BlipSoundService.play(1 - 0.1 * currentReel);
         }
 
         this.lastUpdate = now;
@@ -136,6 +148,7 @@ export class SlotMachine {
             speed,
         ) * 5;
 
+        StopSoundService.play();
         window.navigator.vibrate(VIBRATION_STOP);
 
         reel.style.animation = `${ animationName } ${ animationDuration }ms ease-out forwards`;
