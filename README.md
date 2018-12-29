@@ -1,7 +1,7 @@
 SlotJS
 ======
 
-Circular slot machine built with JavaScript.
+Circular slot machine built with JavaScript and Emojis!
 
 
 Running It (Development)
