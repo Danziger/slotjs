@@ -67,7 +67,6 @@ module.exports = {
             favicon: path.resolve(__dirname, 'static/favicon.ico'),
             inlineSource: '.(js|css)$', // Inline JS and CSS.
             meta: {
-
                 author: pkg.author.name,
                 description: pkg.description,
             },
