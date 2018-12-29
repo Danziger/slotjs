@@ -11,7 +11,7 @@ export class BaseSoundService {
             sounds.push(new Audio(path));
         }
 
-        this.totalSounds = bufferSize;
+        sounds[0].oncanplay = () => { this.totalSounds = bufferSize; };
     }
 
     play(volume = 1) {
