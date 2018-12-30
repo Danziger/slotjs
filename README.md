@@ -28,8 +28,6 @@ Take a look at `package.json`, the scripts are self-explanatory.
 TODO
 ----
 
-- Create reels' HTML from JS.
-
 - Check win.
 
 - Hide (fade) shadows using CSS animations.
@@ -50,13 +48,7 @@ Limitations & Possible Improvements
 
   We would have to do a performance test with each approach for a specific game configuration (number of reels, global VS individual speed/acceleration...).
 
-- The transition from a stopped animation to start rotating again could be smooth, so that it looks like the reel just continues spinning. Currently it jumps back to the position it was when we stopped it (before the animation) when the animation is removed to start another game.
-
 - A rotation animation could be used instead of manually calculating the rotation, but then when we stop a reel, we would need to find out its angle from a rotation matrix and make sure the transition between the rotation and the stopping animation is smooth.
-
-- The number of "shadow" symbols and size of the symbols and reels is currently not linked to the size of the window. Doing this when the game loads won't be too much of an issue, but dynamically resizing or showing/hiding them if the user resizes the browser while the game is running could impact performance.
-
-  An alternative would be to always render the game with the same dimensions and scale it up or down to match the available space, which would also ensure it always has the same proportions (similarly to what we do to zoom in the result).
 
 
 Author

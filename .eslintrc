@@ -38,9 +38,13 @@
         "prefer-destructuring": [2, {
             "array": false
         }],
-        "object-curly-newline": [2, { "multiline": true, "consistent": true }]
+        "object-curly-newline": [2, { "multiline": true, "consistent": true }],
+        "no-param-reassign": [2, { "props": false }]
     },
     "plugins": [
         "babel"
-    ]
+    ],
+    "env": {
+        "browser": true
+    }
 }

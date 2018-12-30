@@ -24,6 +24,16 @@ module.exports = (env, argv) => {
             ],
         },
 
+        /*
+        // TODO: Integrate with ESLint:
+        // https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/1321
+        resolve: {
+            alias: {
+                common: path.resolve(__dirname, 'src/common/'),
+            },
+        },
+        */
+
         output: {
             filename: '[name].js',
             path: path.resolve(__dirname, 'dist'),
@@ -31,7 +41,7 @@ module.exports = (env, argv) => {
         },
 
         devServer: {
-            contentBase: path.resolve(__dirname, 'dist'),
+            contentBase: path.resolve(__dirname, 'static'),
             publicPath: '/slotjs/',
         },
 

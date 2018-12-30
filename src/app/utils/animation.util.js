@@ -20,7 +20,7 @@ export function resetAnimations() {
     }
 }
 
-export function stopAt(name, start, end, alpha, speed) {
+export function stopAtAnimation(name, start, end, alpha, speed) {
     const angles = [
         start,
         end - alpha * 0.25,

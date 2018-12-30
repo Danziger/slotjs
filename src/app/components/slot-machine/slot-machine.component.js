@@ -1,107 +1,105 @@
-import { createElement } from '../../utils/dom.util';
-import { stopAt, resetAnimations } from '../../utils/animation.util';
-import { shuffle } from '../../utils/array.util';
-import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
-import { VIBRATION_START, VIBRATION_STOP } from '../../constants/vibration.constants';
-import { BlipSoundService } from '../../services/sound/blip/blip-sound.service';
-import { StopSoundService } from '../../services/sound/stop/stop-sound.service';
-import { UnluckySoundService } from '../../services/sound/unlucky/unlucky-sound.service';
+import { SYMBOLS_CLASSIC } from '../../constants/symbols.constants';
+import { resetAnimations } from '../../utils/animation.util';
+import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
+import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
+
+import { SlotMachineReel } from './reel/slot-machine-reel.component';
 
 import './slot-machine.style.scss';
 
+
 export class SlotMachine {
 
-    static SELECTOR_BASE = '.sm__base';
-    static SELECTOR_DISPLAY = '.sm__display';
-    static SELECTOR_REEL = '.sm__reel';
+    // CSS classes:
+    static C_HAS_ZOOM = 'has-zoom';
+
+    // CSS selectors:
+    static S_BASE = '.sm__base';
+    static S_REELS_CONTAINER = '.sm__reelsContainer';
+    static S_DISPLAY = '.sm__display';
+
+    // CSS variables:
+    static V_REEL_SIZE = '--reelSize';
+    static V_DISPLAY_SIZE = '--displaySize';
+    static V_DISPLAY_ZOOM = '--displayZoom';
+
+    // Misc.:
+    static CENTER_N_MARGIN_UNITS = 4;
+    static ZOOM_TRANSITION = 'transform ease-in-out 500ms 250ms';
+    static ZOOM_TRANSITION_DURATION = 1000;
+    static BLIP_RATE = 4;
 
     // Elements:
-    root = document.querySelector(SlotMachine.SELECTOR_BASE);
-    display = document.querySelector(SlotMachine.SELECTOR_DISPLAY);
+    root = document.querySelector(SlotMachine.S_BASE);
+    reelsContainer = document.querySelector(SlotMachine.S_REELS_CONTAINER);
+    display = document.querySelector(SlotMachine.S_DISPLAY);
     reels = [];
 
-    // Visual config:
-    shadows = [4, 3, 2, 1, 0]; // TODO: Calculate dynamically...
-    symbols = [...SYMBOLS_RANDOM];
-    alpha = 360 / SYMBOLS_RANDOM.length;
+    // Config:
+    blipFading;
+    reelCount;
+    symbols;
+    alpha;
+    speed;
 
     // State:
+    zoomTransitionTimeoutID = null;
     currentReel = null;
-    speed = -0.75;
-    lastUpdate = 0;
     blipCounter = 0;
+    lastUpdate = 0;
 
-    constructor() {
-        this.init();
+    constructor(reelCount, symbols, speed) {
+        this.init(reelCount, symbols, speed);
 
-        document.onclick = this.handleClick.bind(this);
         window.onresize = this.handleResize.bind(this);
+        document.onclick = this.handleClick.bind(this);
     }
 
-    init() {
-        const { alpha, shadows, symbols } = this;
+    init(reelCount = 3, symbols = SYMBOLS_CLASSIC, speed = -0.75) {
+        const alpha = this.alpha = 360 / symbols.length;
+        const shuffledSymbols = [...symbols];
 
+        this.blipFading = -1 / reelCount;
+        this.reelCount = reelCount;
+        this.symbols = symbols;
+        this.speed = speed;
+
+        // Sets --reelSize and --displaySize:
         this.resize();
 
-        // TODO: Create reels with JS!
+        const { reelsContainer, reels } = this;
 
-        this.reels = Array
-            .from(document.querySelectorAll(SlotMachine.SELECTOR_REEL))
-            .slice(0, -1)
-            .map((reel, ireel) => {
-                shuffle(symbols);
+        for (let reelIndex = 0; reelIndex < reelCount; ++reelIndex) {
+            const reel = new SlotMachineReel(reelIndex, alpha, shuffledSymbols);
 
-                symbols.forEach((symbol, isymbol) => {
-                    const slotText = createElement('sm__cellFigure', symbol);
-                    const slot = createElement('sm__cell', slotText, isymbol * alpha);
+            reelsContainer.appendChild(reel.root);
+            reels.push(reel);
+        }
 
-                    reel.appendChild(slot);
-
-                    const totalShadows = shadows[ireel];
-                    const beta = 1 / (totalShadows + 1);
-
-                    for (let ishadow = 1; ishadow <= totalShadows; ++ishadow) {
-                        reel.appendChild(createElement(
-                            `sm__cell sm__shadow sm__shadow-${ ishadow }`,
-                            slotText.cloneNode(true),
-                            (isymbol + beta * ishadow) * alpha,
-                        ));
-                    }
-                });
-
-                return { element: reel, style: reel.style, angle: 0 };
-            });
-    }
-
-    resize() {
-        const size = this.size = Math.floor((Math.min(window.innerWidth, window.innerHeight) - 96) / 11);
-
-        this.root.style.setProperty('--size', `${ size }px`);
+        // Additional reel at the end that acts as a "cover" in case we set a background color on them and we only want
+        // to see a ring even in the inner-most one, instead of a filled circle:
+        reelsContainer.appendChild(new SlotMachineReel(reelCount).root);
     }
 
     start() {
-        const { reels, root } = this;
-
+        this.currentReel = 0;
+        this.zoomOut();
+        this.reels.forEach(reel => reel.reset());
         resetAnimations();
 
-        reels.map(reel => reel.element.classList.remove('is-stop'));
-        root.style.transform = '';
+        SMVibrationService.start();
 
-        this.currentReel = 0;
         this.lastUpdate = performance.now();
-
-        window.navigator.vibrate(VIBRATION_START);
-
         requestAnimationFrame(() => this.tick());
     }
 
     stop() {
         this.currentReel = null;
-        this.root.style.transform = `scale(${ this.root.offsetWidth / this.display.offsetWidth })`;
+        this.zoomIn();
 
         // TODO: Check win
 
-        UnluckySoundService.play();
+        SMSoundService.unlucky();
     }
 
     tick() {
@@ -114,10 +112,10 @@ export class SlotMachine {
             return;
         }
 
-        const blipCounter = this.blipCounter = (this.blipCounter + 1) % 4;
+        const blipCounter = this.blipCounter = (this.blipCounter + 1) % SlotMachine.BLIP_RATE;
 
         if (blipCounter === 0) {
-            BlipSoundService.play(1 - 0.1 * currentReel);
+            SMSoundService.blip(this.blipFading * currentReel);
         }
 
         this.lastUpdate = now;
@@ -132,27 +130,47 @@ export class SlotMachine {
         requestAnimationFrame(() => this.tick());
     }
 
+    zoomIn() {
+        this.zoom();
+    }
+
+    zoomOut() {
+        this.zoom(true);
+    }
+
+    zoom(out = false) {
+        clearTimeout(this.zoomTransitionTimeoutID);
+
+        const { root } = this;
+
+        root.style.transition = SlotMachine.ZOOM_TRANSITION;
+        root.classList[out ? 'remove' : 'add'](SlotMachine.C_HAS_ZOOM);
+
+        // We do this as transition end will bubble up and fire a lot of times, not only for this transition:
+        this.zoomTransitionTimeoutID = setTimeout(() => {
+            root.style.transition = '';
+        }, SlotMachine.ZOOM_TRANSITION_DURATION);
+    }
+
+    resize() {
+        const { root, reelCount, display } = this;
+        const { style } = root;
+        const { innerWidth, innerHeight } = window;
+        const size = Math.min(innerWidth, innerHeight) / (2 * reelCount + SlotMachine.CENTER_N_MARGIN_UNITS) | 0;
+
+        style.setProperty(SlotMachine.V_REEL_SIZE, `${ size }px`);
+        style.setProperty(SlotMachine.V_DISPLAY_SIZE, `${ size * reelCount }px`);
+        style.setProperty(SlotMachine.V_DISPLAY_ZOOM, `${ root.offsetWidth / display.offsetWidth }`);
+    }
+
     stopReel(reelIndex) {
-        const { alpha, speed } = this;
+        const { speed } = this;
         const deltaAlpha = (performance.now() - this.lastUpdate) * speed;
-        const reel = this.reels[reelIndex];
-        const angle = (360 - reel.angle - deltaAlpha) % 360;
-        const index = Math.ceil(angle / alpha);
-        const stopAngle = index * alpha;
-        const animationName = `stop-${ reelIndex }`;
-        const animationDuration = stopAt(
-            animationName,
-            (360 - angle) % 360,
-            (360 - stopAngle) % 360,
-            alpha,
-            speed,
-        ) * 5;
 
-        StopSoundService.play();
-        window.navigator.vibrate(VIBRATION_STOP);
+        this.reels[reelIndex].stop(speed, deltaAlpha);
 
-        reel.style.animation = `${ animationName } ${ animationDuration }ms ease-out forwards`;
-        reel.element.classList.add('is-stop');
+        SMSoundService.stop();
+        SMVibrationService.stop();
     }
 
     handleClick() {

@@ -1,11 +1,11 @@
 export function createElement(className = '', content = '', angle = null) {
     const element = document.createElement('DIV');
 
-    element.className = className;
+    element.className = Array.isArray(className) ? className.join(' ') : className;
 
     if (typeof content === 'string') {
         element.innerText = content;
-    } else {
+    } else if (content) {
         element.appendChild(content);
     }
 

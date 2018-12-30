@@ -1,4 +1,4 @@
-export class BaseSoundService {
+export class SoundBuffer {
 
     sounds = [];
     nextSound = 0;
@@ -20,7 +20,7 @@ export class BaseSoundService {
         const sound = sounds[nextSound];
 
         if (totalSounds && sound.paused) {
-            sound.volume = volume;
+            sound.volume = volume < 0 ? 1 + volume : volume;
             sound.play();
 
             this.nextSound = (nextSound + 1) % totalSounds;
