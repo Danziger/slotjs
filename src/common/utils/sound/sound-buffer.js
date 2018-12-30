@@ -20,7 +20,7 @@ export class SoundBuffer {
         const sound = sounds[nextSound];
 
         if (totalSounds && sound.paused) {
-            sound.volume = volume < 0 ? 1 + volume : volume;
+            sound.volume = volume;
             sound.play();
 
             this.nextSound = (nextSound + 1) % totalSounds;

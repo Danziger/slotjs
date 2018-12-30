@@ -27,17 +27,15 @@ Take a look at `package.json`, the scripts are self-explanatory.
 TODO
 ----
 
-- Check win.
+- Blur (fade) shadows using the `style` attribute instead of the `shadow-N` classes and calculate how many to add dynamically.
 
-- Hide (fade) shadows using CSS animations.
-
-- Blur (fade) shadows using the `style` attribute instead of the `shadow-N` classes.
+- Add title, coins and footer and improve layout in general.
 
 - Keep track of coins.
 
-- Handle code TODOs.
+- Check win.
 
-- Add title, coins and footer.
+- Handle code TODOs.
 
 
 Limitations & Possible Improvements

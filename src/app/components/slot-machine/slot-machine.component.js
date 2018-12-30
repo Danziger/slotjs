@@ -59,7 +59,7 @@ export class SlotMachine {
         const alpha = this.alpha = 360 / symbols.length;
         const shuffledSymbols = [...symbols];
 
-        this.blipFading = -1 / reelCount;
+        this.blipFading = 1 / reelCount;
         this.reelCount = reelCount;
         this.symbols = symbols;
         this.speed = speed;
@@ -115,7 +115,7 @@ export class SlotMachine {
         const blipCounter = this.blipCounter = (this.blipCounter + 1) % SlotMachine.BLIP_RATE;
 
         if (blipCounter === 0) {
-            SMSoundService.blip(this.blipFading * currentReel);
+            SMSoundService.blip(1 - this.blipFading * currentReel);
         }
 
         this.lastUpdate = now;
