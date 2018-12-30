@@ -1,85 +1,86 @@
 .sm__base {
-  --size: 32px;
-  --bg: transparent;
-  --reels: 5;
+  --reelSize: 32px;
+  --displaySize: 96px;
+  --displayZoom: 2;
   position: relative;
-  width: calc(100% - var(--size));
-  height: calc(100vh - var(--size));
-  max-height: calc(100vw - var(--size));
-  max-width: calc(100vh - var(--size));
+  width: calc(100% - var(--reelSize));
+  height: calc(100vh - var(--reelSize));
+  max-height: calc(100vw - var(--reelSize));
+  max-width: calc(100vh - var(--reelSize));
   box-sizing: border-box;
   pointer-events: none;
   -webkit-transform-origin: left center;
           transform-origin: left center;
-  transition: -webkit-transform ease-in-out 500ms 250ms;
-  transition: transform ease-in-out 500ms 250ms;
-  transition: transform ease-in-out 500ms 250ms, -webkit-transform ease-in-out 500ms 250ms;
   will-change: transform; }
+  .sm__base.has-zoom {
+    -webkit-transform: scale(var(--displayZoom));
+            transform: scale(var(--displayZoom)); }
 
-.sm__activeReels {
+.sm__reelsContainer {
   position: relative;
   width: 100%;
   height: 100%; }
 
 .sm__reel {
+  --i: 0;
+  --bg: transparent;
   position: absolute;
-  top: calc( var(--i) * var(--size));
-  left: calc( var(--i) * var(--size));
-  width: calc(100% - var(--i) * 2 * var(--size));
-  height: calc(100% - var(--i) * 2 * var(--size));
+  top: calc( var(--index) * var(--reelSize));
+  left: calc( var(--index) * var(--reelSize));
+  width: calc(100% - var(--index) * 2 * var(--reelSize));
+  height: calc(100% - var(--index) * 2 * var(--reelSize));
   background: var(--bg);
   border-radius: 100%;
   overflow: hidden;
-  box-shadow: 0 0 var(--size) 0 rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0 var(--reelSize) 0 rgba(0, 0, 0, 0.125);
   will-change: transform; }
   .sm__reel:first-child, .sm__reel:last-child {
     box-shadow: none; }
 
 .sm__cell {
   position: absolute;
-  height: var(--size);
-  line-height: var(--size);
-  font-size: calc(var(--size) / 2);
+  height: var(--reelSize);
+  line-height: var(--reelSize);
+  font-size: calc(var(--reelSize) / 2);
   top: 50%;
   left: 0;
   width: 50%;
-  margin-top: calc(var(--size) / -2);
+  margin-top: calc(var(--reelSize) / -2);
   -webkit-transform-origin: center right;
           transform-origin: center right; }
+  .sm__cell--shadow {
+    -webkit-filter: blur(2px);
+            filter: blur(2px);
+    transition: opacity linear .125s; }
+    .sm__cell--shadow-1 {
+      opacity: .5; }
+    .sm__cell--shadow-2 {
+      opacity: .4; }
+    .sm__cell--shadow-3 {
+      opacity: .3; }
+    .sm__cell--shadow-4 {
+      opacity: .2; }
+    .sm__cell--shadow-5 {
+      opacity: .1; }
+    .is-stop .sm__cell--shadow {
+      opacity: 0; }
 
-.sm__shadow {
-  -webkit-filter: blur(2px);
-          filter: blur(2px);
-  transition: opacity linear .125s; }
-  .sm__shadow-1 {
-    opacity: .5; }
-  .sm__shadow-2 {
-    opacity: .4; }
-  .sm__shadow-3 {
-    opacity: .3; }
-  .sm__shadow-4 {
-    opacity: .2; }
-  .sm__shadow-5 {
-    opacity: .1; }
-  .is-stop .sm__shadow {
-    opacity: 0; }
-
-.sm__cellFigure {
+.sm__figure {
   display: inline-block;
   text-align: center;
-  width: var(--size); }
+  width: var(--reelSize); }
 
 .sm__display {
   position: absolute;
   top: 50%;
   left: 0;
-  width: calc(var(--reels) * var(--size));
-  height: var(--size);
-  margin-top: calc(var(--size) / -2); }
+  width: var(--displaySize);
+  height: var(--reelSize);
+  margin-top: calc(var(--reelSize) / -2); }
   .sm__display--background {
     z-index: -1; }
   .sm__display--shadow {
-    box-shadow: 0 calc(var(--size) / 2) var(--size) calc(var(--size) / -8) rgba(0, 0, 0, 0.25);
+    box-shadow: 0 calc(var(--reelSize) / 2) var(--reelSize) calc(var(--reelSize) / -8) rgba(0, 0, 0, 0.25);
     border-radius: 0 0 2px 2px; }
 
 body {
