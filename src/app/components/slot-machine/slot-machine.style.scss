@@ -4,6 +4,7 @@
         --reelSize: 32px;
         --displaySize: 96px;
         --displayZoom: 2;
+        --shadowWeight: 1;
 
         position: relative;
         width: calc(100% - var(--reelSize));
@@ -38,7 +39,7 @@
         background: var(--bg);
         border-radius: 100%;
         overflow: hidden;
-        box-shadow: 0 0 var(--reelSize) 0 rgba(0,0,0,.125);
+        box-shadow: 0 0 calc(var(--shadowWeight) * var(--reelSize)) 0 rgba(0,0,0,.125);
         will-change: transform;
 
         &:first-child,
@@ -58,25 +59,17 @@
         margin-top: calc(var(--reelSize) / -2);
         transform-origin: center right;
 
-        &--shadow {
-            filter: blur(2px);
+        &--has-shadow {
             transition: opacity linear .125s;
 
-            // TODO: These could be calculated dynamically with JS:
-
-            &-1 { opacity: .5; }
-
-            &-2 { opacity: .4; }
-
-            &-3 { opacity: .3; }
-
-            &-4 { opacity: .2; }
-
-            &-5 { opacity: .1; }
-
             .is-stop & {
-                opacity: 0;
+                opacity: 0 !important;
             }
+        }
+
+        &--has-blur {
+            // Blur is too slow on Firefox. This could be fixed using (pre-blurred) images instead of icons.
+            filter: blur(calc(var(--reelSize) / 8));
         }
     }
 
@@ -101,8 +94,11 @@
         }
 
         &--shadow {
-            box-shadow: 0 calc(var(--reelSize) / 2) var(--reelSize) calc(var(--reelSize) / -8) rgba(0,0,0,.25);
             border-radius: 0 0 2px 2px; // Bottom only
+            box-shadow: 0 calc(var(--reelSize) / 2)
+                calc(var(--shadowWeight) * var(--reelSize))
+                calc(var(--reelSize) / -8)
+                rgba(0,0,0,.25);
         }
     }
 }

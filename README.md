@@ -75,10 +75,6 @@ However, keep in mind this will stop working if we delete `dist`. In that case, 
 TODO
 ----
 
-- Blur (fade) shadows using the `style` attribute instead of the `shadow-N` classes and calculate how many to add dynamically.
-
-- Blur shadows only on Chrome, as it performs poorly on Firefox.
-
 - Add title, coins and footer and improve layout in general.
 
 - Keep track of coins.

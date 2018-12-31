@@ -1,13 +1,15 @@
 import { stopAtAnimation } from '../../../utils/animation.util';
 import { createElement } from '../../../utils/dom.util';
 import { shuffle } from '../../../utils/array.util';
+import { IS_FIREFOX } from '../../../constants/browser.constants';
 
 export class SlotMachineReel {
 
     // CSS classes:
     static C_REEL = 'sm__reel';
     static C_CELL = 'sm__cell';
-    static C_CELL_SHADOW = 'sm__cell--shadow';
+    static C_CELL_SHADOW = 'sm__cell--has-shadow';
+    static C_CELL_BLUR = 'sm__cell--has-blur';
     static C_FIGURE = 'sm__figure';
     static C_IS_STOP = 'is-stop';
 
@@ -16,9 +18,6 @@ export class SlotMachineReel {
 
     // Misc.:
     static STOP_ANIMATION_DURATION_MULTIPLIER = 5;
-
-    // TODO: Calculate dynamically...
-    shadows = [4, 3, 2, 1, 0];
 
     // Elements:
     root;
@@ -32,15 +31,33 @@ export class SlotMachineReel {
     angle = 0;
     stopAt = 0;
 
-    constructor(index, alpha = 0, symbols = []) {
+    constructor(index, alpha, symbols, diameter) {
         this.index = index;
         this.alpha = alpha;
 
-        const { C_REEL, C_CELL, C_CELL_SHADOW, C_FIGURE, C_IS_STOP, V_INDEX } = SlotMachineReel;
+        const { C_REEL, C_CELL, C_CELL_SHADOW, C_CELL_BLUR, C_FIGURE, C_IS_STOP, V_INDEX } = SlotMachineReel;
         const root = this.root = createElement([C_REEL, C_IS_STOP]);
         const style = this.style = root.style;
 
         style.setProperty(V_INDEX, index);
+
+        if (!symbols) {
+            return;
+        }
+
+        let cellShadowClasses;
+        let shadowOpacityWeight;
+
+        if (IS_FIREFOX) {
+            cellShadowClasses = [C_CELL, C_CELL_SHADOW];
+            shadowOpacityWeight = 0.5;
+        } else {
+            cellShadowClasses = [C_CELL, C_CELL_SHADOW, C_CELL_BLUR];
+            shadowOpacityWeight = 1;
+        }
+
+        const shadowCount = Math.max(2, Math.round((diameter - 0.5 - 2 * index) * Math.PI / symbols.length));
+        const beta = 1 / shadowCount;
 
         shuffle(symbols);
 
@@ -50,15 +67,12 @@ export class SlotMachineReel {
 
             root.appendChild(cell);
 
-            // TODO: Calculate using size or %:
-            const shadowCount = this.shadows[index] + 1;
-            const beta = 1 / shadowCount;
-
             for (let shadowIndex = 1; shadowIndex < shadowCount; ++shadowIndex) {
                 root.appendChild(createElement(
-                    [C_CELL, C_CELL_SHADOW, `${ C_CELL_SHADOW }-${ shadowIndex }`],
+                    cellShadowClasses,
                     cellFigure.cloneNode(true),
                     alpha * (symbolIndex + beta * shadowIndex),
+                    `opacity: ${ shadowOpacityWeight * (1 - beta * shadowIndex) }; `,
                 ));
             }
         });

@@ -53,7 +53,6 @@ export function stopAtAnimation(name, start, end, alpha, speed) {
         return p;
     });
 
-    // TODO: Handle opacity here!
     const animation = percent.map((p, i) => `${ Math.round(p) }% { transform: rotate(${ angles[i].toFixed(2) }deg); }`).join('\n');
 
     addAnimation(name, animation);

@@ -2,6 +2,7 @@ import { SYMBOLS_CLASSIC } from '../../constants/symbols.constants';
 import { resetAnimations } from '../../utils/animation.util';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
 import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
+import { IS_FIREFOX } from '../../constants/browser.constants';
 
 import { SlotMachineReel } from './reel/slot-machine-reel.component';
 
@@ -22,12 +23,16 @@ export class SlotMachine {
     static V_REEL_SIZE = '--reelSize';
     static V_DISPLAY_SIZE = '--displaySize';
     static V_DISPLAY_ZOOM = '--displayZoom';
+    static V_SHADOW_WEIGHT = '--shadowWeight';
 
     // Misc.:
-    static CENTER_N_MARGIN_UNITS = 4;
+    static UNITS_CENTER = 3;
+    static UNITS_MARGIN = 1;
+    static UNITS_TOTAL = SlotMachine.UNITS_CENTER + SlotMachine.UNITS_MARGIN;
     static ZOOM_TRANSITION = 'transform ease-in-out 500ms 250ms';
     static ZOOM_TRANSITION_DURATION = 1000;
     static BLIP_RATE = 4;
+    static FIREFOX_SHADOW_WEIGHT = 0.5;
 
     // Elements:
     root = document.querySelector(SlotMachine.S_BASE);
@@ -55,9 +60,10 @@ export class SlotMachine {
         document.onclick = this.handleClick.bind(this);
     }
 
-    init(reelCount = 3, symbols = SYMBOLS_CLASSIC, speed = -0.75) {
+    init(reelCount = 3, symbols = SYMBOLS_CLASSIC, speed = -1.05) {
         const alpha = this.alpha = 360 / symbols.length;
         const shuffledSymbols = [...symbols];
+        const diameter = 2 * reelCount + SlotMachine.UNITS_CENTER;
 
         this.blipFading = 1 / reelCount;
         this.reelCount = reelCount;
@@ -67,10 +73,14 @@ export class SlotMachine {
         // Sets --reelSize and --displaySize:
         this.resize();
 
+        if (IS_FIREFOX) {
+            this.root.style.setProperty(SlotMachine.V_SHADOW_WEIGHT, SlotMachine.FIREFOX_SHADOW_WEIGHT);
+        }
+
         const { reelsContainer, reels } = this;
 
         for (let reelIndex = 0; reelIndex < reelCount; ++reelIndex) {
-            const reel = new SlotMachineReel(reelIndex, alpha, shuffledSymbols);
+            const reel = new SlotMachineReel(reelIndex, alpha, shuffledSymbols, diameter);
 
             reelsContainer.appendChild(reel.root);
             reels.push(reel);
@@ -156,7 +166,7 @@ export class SlotMachine {
         const { root, reelCount, display } = this;
         const { style } = root;
         const { innerWidth, innerHeight } = window;
-        const size = Math.min(innerWidth, innerHeight) / (2 * reelCount + SlotMachine.CENTER_N_MARGIN_UNITS) | 0;
+        const size = Math.min(innerWidth, innerHeight) / (2 * reelCount + SlotMachine.UNITS_TOTAL) | 0;
 
         style.setProperty(SlotMachine.V_REEL_SIZE, `${ size }px`);
         style.setProperty(SlotMachine.V_DISPLAY_SIZE, `${ size * reelCount }px`);
