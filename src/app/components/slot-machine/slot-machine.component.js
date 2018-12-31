@@ -3,6 +3,7 @@ import { resetAnimations } from '../../utils/animation.util';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
 import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
 import { IS_FIREFOX } from '../../constants/browser.constants';
+import { setGlobalClickAndTabHandler } from '../../utils/touch.util';
 
 import { SlotMachineReel } from './reel/slot-machine-reel.component';
 
@@ -57,7 +58,8 @@ export class SlotMachine {
         this.init(reelCount, symbols, speed);
 
         window.onresize = this.handleResize.bind(this);
-        document.onclick = this.handleClick.bind(this);
+
+        setGlobalClickAndTabHandler(this.handleClick.bind(this));
     }
 
     init(reelCount = 3, symbols = SYMBOLS_CLASSIC, speed = -1.05) {
