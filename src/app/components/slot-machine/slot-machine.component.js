@@ -68,6 +68,7 @@ export class SlotMachine {
         this.init(wrapper, handleUseCoin, handleGetPrice, reelCount, symbols, speed);
 
         window.onresize = this.handleResize.bind(this);
+        document.onkeydown = this.handleKeyDown.bind(this);
 
         setGlobalClickAndTabHandler(this.handleClick.bind(this));
     }
@@ -210,6 +211,18 @@ export class SlotMachine {
         SMVibrationService.stop();
     }
 
+    handleResize() {
+        requestAnimationFrame(() => this.resize());
+    }
+
+    handleKeyDown(e) {
+        const { key } = e;
+
+        if (key === ' ' || key === 'Enter') {
+            this.handleClick();
+        }
+    }
+
     handleClick() {
         const { currentReel } = this;
 
@@ -224,10 +237,6 @@ export class SlotMachine {
                 this.stop();
             }
         }
-    }
-
-    handleResize() {
-        requestAnimationFrame(() => this.resize());
     }
 
 }

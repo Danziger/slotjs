@@ -83,7 +83,9 @@ TODO
 
 - Make it accessible for screen readers.
 
-- Use keyboard.
+- Allow enable/disable sound and vibration.
+
+- Add ogg sound files for Firefox...
 
 
 Limitations & Possible Improvements
