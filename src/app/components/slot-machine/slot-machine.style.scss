@@ -58,6 +58,7 @@
         width: 50%;
         margin-top: calc(var(--reelSize) / -2);
         transform-origin: center right;
+        filter: none;
 
         &--has-shadow {
             transition: opacity linear .125s;
