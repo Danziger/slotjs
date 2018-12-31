@@ -2,6 +2,7 @@
   --reelSize: 32px;
   --displaySize: 96px;
   --displayZoom: 2;
+  --shadowWeight: 1;
   position: relative;
   width: calc(100% - var(--reelSize));
   height: calc(100vh - var(--reelSize));
@@ -32,7 +33,7 @@
   background: var(--bg);
   border-radius: 100%;
   overflow: hidden;
-  box-shadow: 0 0 var(--reelSize) 0 rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0 calc(var(--shadowWeight) * var(--reelSize)) 0 rgba(0, 0, 0, 0.125);
   will-change: transform; }
   .sm__reel:first-child, .sm__reel:last-child {
     box-shadow: none; }
@@ -48,22 +49,13 @@
   margin-top: calc(var(--reelSize) / -2);
   -webkit-transform-origin: center right;
           transform-origin: center right; }
-  .sm__cell--shadow {
-    -webkit-filter: blur(2px);
-            filter: blur(2px);
+  .sm__cell--has-shadow {
     transition: opacity linear .125s; }
-    .sm__cell--shadow-1 {
-      opacity: .5; }
-    .sm__cell--shadow-2 {
-      opacity: .4; }
-    .sm__cell--shadow-3 {
-      opacity: .3; }
-    .sm__cell--shadow-4 {
-      opacity: .2; }
-    .sm__cell--shadow-5 {
-      opacity: .1; }
-    .is-stop .sm__cell--shadow {
-      opacity: 0; }
+    .is-stop .sm__cell--has-shadow {
+      opacity: 0 !important; }
+  .sm__cell--has-blur {
+    -webkit-filter: blur(calc(var(--reelSize) / 8));
+            filter: blur(calc(var(--reelSize) / 8)); }
 
 .sm__figure {
   display: inline-block;
@@ -80,8 +72,8 @@
   .sm__display--background {
     z-index: -1; }
   .sm__display--shadow {
-    box-shadow: 0 calc(var(--reelSize) / 2) var(--reelSize) calc(var(--reelSize) / -8) rgba(0, 0, 0, 0.25);
-    border-radius: 0 0 2px 2px; }
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 calc(var(--reelSize) / 2) calc(var(--shadowWeight) * var(--reelSize)) calc(var(--reelSize) / -8) rgba(0, 0, 0, 0.25); }
 
 body {
   margin: 0;
