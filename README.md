@@ -7,7 +7,7 @@
 </p><p align="center">
     🔊 Better with sound on.
 </p><p align="center">
-    📱 Android (and desktop) only.
+    📱 Android, Chrome and Firefox only.
 </p>
 
 <p align="center">
@@ -18,16 +18,66 @@
 
 <hr /><br />
 
+
 Running It (Development)
 ------------------------
 
 Take a look at `package.json`, the scripts are self-explanatory.
 
 
+Deploying to GitHub Pages
+-------------------------
+
+To deploy a static application to GitHub Pages we simply need to push the required files to the `gh-pages` branch. In order to easily push the contents of `dist` only, we can use `git worktree`.
+
+First, we need to create the `gh-pages` branch:
+
+    # Create an orphan gh-pages branch:
+    git checkout --orphan gh-pages
+
+    # Remove all files from staging:
+    git rm -rf .
+
+    # Create an empty commit:
+    git commit --allow-empty -m "Init branch."
+
+    # Push:
+    git push origin gh-pages
+
+
+Then, we configure the working tree from `master`:
+
+    # Back to master:
+    git checkout master
+
+    # Create a working tree in `dist` and checkout `gh-pages` into it:
+    git worktree add dist gh-pages
+
+
+Lastly, we can build or App and deploy it easily:
+
+    # Build the App:
+    npm run build
+
+    # Go into `dist`. Note how the current branch is now `gh-pages` instead of `master`:
+    cd dist
+
+    # Commit the changes:
+    git commit -am "Release to GitHub pages."
+
+    # And push them:
+    git push origin gh-pages
+
+
+However, keep in mind this will stop working if we delete `dist`. In that case, `git worktree list` will still show the now gone working tree in `dist`. To fix that, we simply do `git worktree prune` and create the working tree again with `git worktree add dist gh-pages`.
+
+
 TODO
 ----
 
 - Blur (fade) shadows using the `style` attribute instead of the `shadow-N` classes and calculate how many to add dynamically.
+
+- Blur shadows only on Chrome, as it performs poorly on Firefox.
 
 - Add title, coins and footer and improve layout in general.
 
@@ -36,6 +86,10 @@ TODO
 - Check win.
 
 - Handle code TODOs.
+
+- Create a scripts to deploy to GitHub Pages automatically.
+
+- Tests.
 
 
 Limitations & Possible Improvements
