@@ -5,7 +5,7 @@
 </p><p align="center">
     🚀 Try it out <a href="https://danziger.github.io/slotjs">here</a>! 🔊 Better with sound & vibration on.
 </p><p align="center">
-    💩 No IE, Edge or iOS.
+    💩 No IE or Edge.
 </p>
 
 <p align="center">
