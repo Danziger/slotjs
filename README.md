@@ -73,10 +73,6 @@ However, keep in mind this will stop working if we delete `dist`. In that case, 
 TODO
 ----
 
-- Add title, coins and footer and improve layout in general.
-
-- Keep track of coins.
-
 - Check win.
 
 - Handle code TODOs.
@@ -84,6 +80,10 @@ TODO
 - Create a scripts to deploy to GitHub Pages automatically.
 
 - Tests.
+
+- Make it accessible for screen readers.
+
+- Use keyboard.
 
 
 Limitations & Possible Improvements
@@ -95,6 +95,7 @@ Limitations & Possible Improvements
 
 - A rotation animation could be used instead of manually calculating the rotation, but then when we stop a reel, we would need to find out its angle from a rotation matrix and make sure the transition between the rotation and the stopping animation is smooth.
 
+- Zoom effect is a bit slow on Firefox and blurry on iOS devices. It would be simpler to show a bigger view of the current combination above the slot machine.
 
 Author
 ------

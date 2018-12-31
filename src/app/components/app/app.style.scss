@@ -1,0 +1,81 @@
+.app {
+
+    &__base {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        user-select: none;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    &__title {
+        padding: 24px 16px;
+        margin: 0;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 24px;
+        border-bottom: 3px solid #F0F0F0;
+        text-align: center;
+    }
+
+    &__state {
+        font-size: 16px;
+        line-height: 16px;
+        border-bottom: 3px solid #F0F0F0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        padding: 0;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    &__prop {
+        padding: 16px;
+        width: 33.33333333%;
+        display: flex;
+    }
+
+    &__prop + &__prop {
+        border-left: 3px solid #F0F0F0;
+    }
+
+    &__icon {
+        padding: 8px 12px 8px 0;
+    }
+
+    &__value {
+        background: #F0F0F0;
+        padding: 8px 12px;
+        border-radius: 2px;
+        flex: 1 0 auto;
+    }
+
+    &__main {
+        position: relative;
+        padding: 16px;
+        flex: 1 0 auto;
+        height: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__footer {
+        border-top: 3px solid #F0F0F0;
+        text-align: center;
+    }
+
+    &__link {
+        padding: 16px;
+        font-size: 16px;
+        line-height: 16px;
+        display: block;
+        text-decoration: none;
+        color: black;
+        text-transform: uppercase;
+    }
+}

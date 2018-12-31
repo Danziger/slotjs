@@ -1,16 +1,15 @@
 .sm {
 
     &__base {
+        --wrapperSize: 100%;
         --reelSize: 32px;
         --displaySize: 96px;
         --displayZoom: 2;
         --shadowWeight: 1;
 
         position: relative;
-        width: calc(100% - var(--reelSize));
-        height: calc(100vh - var(--reelSize));
-        max-height: calc(100vw - var(--reelSize));
-        max-width: calc(100vh - var(--reelSize));
+        width: var(--wrapperSize);
+        height: var(--wrapperSize);
         box-sizing: border-box;
         pointer-events: none;
         transform-origin: left center;
@@ -58,7 +57,7 @@
         width: 50%;
         margin-top: calc(var(--reelSize) / -2);
         transform-origin: center right;
-        filter: none;
+        // filter: none;
 
         &--has-shadow {
             transition: opacity linear .125s;

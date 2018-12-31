@@ -1,9 +1,5 @@
 body {
     margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    user-select: none;
+    min-height: 100vh;
+    font-family: monospace;
 }

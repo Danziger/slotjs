@@ -21,6 +21,7 @@ export class SlotMachine {
     static S_DISPLAY = '.sm__display';
 
     // CSS variables:
+    static V_WRAPPER_SIZE = '--wrapperSize';
     static V_REEL_SIZE = '--reelSize';
     static V_DISPLAY_SIZE = '--displaySize';
     static V_DISPLAY_ZOOM = '--displayZoom';
@@ -34,8 +35,10 @@ export class SlotMachine {
     static ZOOM_TRANSITION_DURATION = 1000;
     static BLIP_RATE = 4;
     static FIREFOX_SHADOW_WEIGHT = 0.5;
+    static APP_PADDING = 32;
 
     // Elements:
+    wrapper;
     root = document.querySelector(SlotMachine.S_BASE);
     reelsContainer = document.querySelector(SlotMachine.S_REELS_CONTAINER);
     display = document.querySelector(SlotMachine.S_DISPLAY);
@@ -54,23 +57,40 @@ export class SlotMachine {
     blipCounter = 0;
     lastUpdate = 0;
 
-    constructor(reelCount, symbols, speed) {
-        this.init(reelCount, symbols, speed);
+    constructor(
+        wrapper,
+        handleUseCoin,
+        handleGetPrice,
+        reelCount = 3,
+        symbols = SYMBOLS_CLASSIC,
+        speed = -0.8,
+    ) {
+        this.init(wrapper, handleUseCoin, handleGetPrice, reelCount, symbols, speed);
 
         window.onresize = this.handleResize.bind(this);
 
         setGlobalClickAndTabHandler(this.handleClick.bind(this));
     }
 
-    init(reelCount = 3, symbols = SYMBOLS_CLASSIC, speed = -1.05) {
-        const alpha = this.alpha = 360 / symbols.length;
-        const shuffledSymbols = [...symbols];
-        const diameter = 2 * reelCount + SlotMachine.UNITS_CENTER;
-
-        this.blipFading = 1 / reelCount;
+    init(
+        wrapper,
+        handleUseCoin,
+        handleGetPrice,
+        reelCount,
+        symbols,
+        speed,
+    ) {
+        this.wrapper = wrapper;
+        this.handleUseCoin = handleUseCoin;
+        this.handleGetPrice = handleGetPrice;
         this.reelCount = reelCount;
         this.symbols = symbols;
         this.speed = speed;
+        this.blipFading = 1 / reelCount;
+
+        const alpha = this.alpha = 360 / symbols.length;
+        const shuffledSymbols = [...symbols];
+        const diameter = 2 * reelCount + SlotMachine.UNITS_CENTER;
 
         // Sets --reelSize and --displaySize:
         this.resize();
@@ -94,11 +114,13 @@ export class SlotMachine {
     }
 
     start() {
+        this.handleUseCoin();
         this.currentReel = 0;
         this.zoomOut();
         this.reels.forEach(reel => reel.reset());
         resetAnimations();
 
+        SMSoundService.coin();
         SMVibrationService.start();
 
         this.lastUpdate = performance.now();
@@ -110,6 +132,7 @@ export class SlotMachine {
         this.zoomIn();
 
         // TODO: Check win
+        // this.handleGetPrice();
 
         SMSoundService.unlucky();
     }
@@ -165,13 +188,15 @@ export class SlotMachine {
     }
 
     resize() {
-        const { root, reelCount, display } = this;
+        const { wrapper, root, reelCount, display } = this;
         const { style } = root;
-        const { innerWidth, innerHeight } = window;
-        const size = Math.min(innerWidth, innerHeight) / (2 * reelCount + SlotMachine.UNITS_TOTAL) | 0;
+        const { offsetWidth, offsetHeight } = wrapper;
+        const wrapperSize = Math.min(offsetWidth, offsetHeight) - SlotMachine.APP_PADDING;
+        const reelSize = wrapperSize / (2 * reelCount + SlotMachine.UNITS_TOTAL) | 0;
 
-        style.setProperty(SlotMachine.V_REEL_SIZE, `${ size }px`);
-        style.setProperty(SlotMachine.V_DISPLAY_SIZE, `${ size * reelCount }px`);
+        style.setProperty(SlotMachine.V_WRAPPER_SIZE, `${ wrapperSize }px`);
+        style.setProperty(SlotMachine.V_REEL_SIZE, `${ reelSize }px`);
+        style.setProperty(SlotMachine.V_DISPLAY_SIZE, `${ reelSize * reelCount }px`);
         style.setProperty(SlotMachine.V_DISPLAY_ZOOM, `${ root.offsetWidth / display.offsetWidth }`);
     }
 
