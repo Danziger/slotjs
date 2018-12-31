@@ -1,13 +1,12 @@
 .sm__base {
+  --wrapperSize: 100%;
   --reelSize: 32px;
   --displaySize: 96px;
   --displayZoom: 2;
   --shadowWeight: 1;
   position: relative;
-  width: calc(100% - var(--reelSize));
-  height: calc(100vh - var(--reelSize));
-  max-height: calc(100vw - var(--reelSize));
-  max-width: calc(100vh - var(--reelSize));
+  width: var(--wrapperSize);
+  height: var(--wrapperSize);
   box-sizing: border-box;
   pointer-events: none;
   -webkit-transform-origin: left center;
@@ -48,9 +47,7 @@
   width: 50%;
   margin-top: calc(var(--reelSize) / -2);
   -webkit-transform-origin: center right;
-          transform-origin: center right;
-  -webkit-filter: none;
-          filter: none; }
+          transform-origin: center right; }
   .sm__cell--has-shadow {
     transition: opacity linear .125s; }
     .is-stop .sm__cell--has-shadow {
@@ -77,15 +74,80 @@
     border-radius: 0 0 2px 2px;
     box-shadow: 0 calc(var(--reelSize) / 2) calc(var(--shadowWeight) * var(--reelSize)) calc(var(--reelSize) / -8) rgba(0, 0, 0, 0.25); }
 
-body {
-  margin: 0;
-  height: 100vh;
+.app__base {
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-between;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none; }
+          user-select: none;
+  max-width: 800px;
+  margin: 0 auto; }
+
+.app__title {
+  padding: 24px 16px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  border-bottom: 3px solid #F0F0F0;
+  text-align: center; }
+
+.app__state {
+  font-size: 16px;
+  line-height: 16px;
+  border-bottom: 3px solid #F0F0F0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  overflow: hidden; }
+
+.app__prop {
+  padding: 16px;
+  width: 33.33333333%;
+  display: flex; }
+
+.app__prop + .app__prop {
+  border-left: 3px solid #F0F0F0; }
+
+.app__icon {
+  padding: 8px 12px 8px 0; }
+
+.app__value {
+  background: #F0F0F0;
+  padding: 8px 12px;
+  border-radius: 2px;
+  flex: 1 0 auto; }
+
+.app__main {
+  position: relative;
+  padding: 16px;
+  flex: 1 0 auto;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.app__footer {
+  border-top: 3px solid #F0F0F0;
+  text-align: center; }
+
+.app__link {
+  padding: 16px;
+  font-size: 16px;
+  line-height: 16px;
+  display: block;
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: monospace; }
 
