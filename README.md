@@ -3,11 +3,9 @@
 <p align="center">
     🎰 Circular slot machine mobile-first SPA built using JavaScript, CSS variables and Emojis!
 </p><p align="center">
-    👉 Try it out! https://danziger.github.io/slotjs
+    🚀 Try it out <a href="https://danziger.github.io/slotjs">here</a>! 🔊 Better with sound & vibration on.
 </p><p align="center">
-    🔊 Better with sound on.
-</p><p align="center">
-    📱 Android, Chrome and Firefox only.
+    💩 No IE, Edge or iOS.
 </p>
 
 <p align="center">
