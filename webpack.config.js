@@ -77,12 +77,15 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 filename: path.resolve(__dirname, 'dist/index.html'),
                 template: path.resolve(__dirname, 'src/app/templates/index.html'),
-                title: `SlotJS / ${ pkg.description }`,
+                title: 'SlotJS',
+                description: pkg.description,
                 favicon: path.resolve(__dirname, 'static/favicon.ico'),
                 inlineSource: '.(js|css)$', // Inline JS and CSS.
+                minify: PROD,
                 meta: {
                     author: pkg.author.name,
                     description: pkg.description,
+                    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
                 },
                 // We can use templateParameters if more options are required, but it will override all the above.
             }),

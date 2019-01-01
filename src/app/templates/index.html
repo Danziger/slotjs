@@ -3,9 +3,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title><%= htmlWebpackPlugin.options.title %> / <%= htmlWebpackPlugin.options.description %></title>
+
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.title %>">
+    <meta property="og:description" content="<%= htmlWebpackPlugin.options.description %>">
+    <meta property="og:image" content="https://danziger.github.io/slotjs/screenshots/slotjs.png">
+    <meta property="og:url" content="https://danziger.github.io/slotjs/">
+    <meta name="twitter:card" content="https://danziger.github.io/slotjs/screenshots/slotjs.png">
+
 </head>
 
 <body class="app__base">

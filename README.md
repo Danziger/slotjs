@@ -10,7 +10,7 @@
 
 <p align="center">
     <a href="https://danziger.github.io/slotjs" target="_blank">
-        <img src="./screenshots/slotjs.png" width="512" />
+        <img src="./static/screenshots/slotjs.png" width="512" />
     </a>
 </p>
 
@@ -79,7 +79,7 @@ TODO
 
 - Rage mode.
 
-- Viewport-specific styles.
+- Viewport-specific styles. See https://github.com/webpack-contrib/mini-css-extract-plugin#media-query-plugin
 
 - Full-screen mode.
 
