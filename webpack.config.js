@@ -2,10 +2,13 @@ const path = require('path');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const pkg = require('./package.json');
 
@@ -104,6 +107,7 @@ module.exports = (env, argv) => {
                     DEVELOPMENT: true,
                 },
             }),
+            // new BundleAnalyzerPlugin(),
         ],
 
         optimization: {
@@ -118,6 +122,16 @@ module.exports = (env, argv) => {
                     },
                 },
             },
+
+            minimizer: PROD ? [
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    sourceMap: false,
+                }),
+                // Might not be needed with Webpack 5:
+                new OptimizeCSSAssetsPlugin({}),
+            ] : [],
         },
     };
 
