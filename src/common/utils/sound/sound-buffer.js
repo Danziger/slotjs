@@ -4,7 +4,7 @@ export class SoundBuffer {
     nextSound = 0;
     totalSounds = 0;
 
-    constructor(path, bufferSize = 8) {
+    constructor(path, bufferSize = 16) {
         const { sounds } = this;
 
         for (let i = 0; i < bufferSize; ++i) {
