@@ -73,7 +73,21 @@ However, keep in mind this will stop working if we delete `dist`. In that case, 
 TODO
 ----
 
-- Check win.
+- Performance improvements.
+
+- Cheat mode.
+
+- Rage mode.
+
+- Viewport-specific styles.
+
+- Full-screen mode.
+
+- Service worker.
+
+- Inline App CSS (style attribute).
+
+- Allow enable/disable sound and vibration.
 
 - Handle code TODOs.
 
@@ -82,10 +96,6 @@ TODO
 - Tests.
 
 - Make it accessible for screen readers.
-
-- Allow enable/disable sound and vibration.
-
-- Add ogg sound files for Firefox...
 
 
 Limitations & Possible Improvements
@@ -98,6 +108,7 @@ Limitations & Possible Improvements
 - A rotation animation could be used instead of manually calculating the rotation, but then when we stop a reel, we would need to find out its angle from a rotation matrix and make sure the transition between the rotation and the stopping animation is smooth.
 
 - Zoom effect is a bit slow on Firefox and blurry on iOS devices. It would be simpler to show a bigger view of the current combination above the slot machine.
+
 
 Author
 ------
