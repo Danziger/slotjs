@@ -1,10 +1,12 @@
+import { IS_FIREFOX } from '../../../constants/browser.constants';
 import { SoundBuffer } from '../../../../common/utils/sound/sound-buffer';
 
-const blipSound = new SoundBuffer('./assets/blip.mp3', 16);
-const coinSound = new SoundBuffer('./assets/coin.mp3');
-const stopSound = new SoundBuffer('./assets/stop.mp3');
-const unluckySound = new SoundBuffer('./assets/unlucky.mp3', 4);
-const winSound = new SoundBuffer('./assets/win.mp3', 4);
+const extension = IS_FIREFOX ? 'ogg' : 'mp3';
+const blipSound = new SoundBuffer(`./assets/blip.${ extension }`, 16);
+const coinSound = new SoundBuffer(`./assets/coin.${ extension }`);
+const stopSound = new SoundBuffer(`./assets/stop.${ extension }`);
+const unluckySound = new SoundBuffer(`./assets/unlucky.${ extension }`, 4);
+const winSound = new SoundBuffer(`./assets/win.${ extension }`, 4);
 
 export const SMSoundService = {
 
