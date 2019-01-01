@@ -21,8 +21,9 @@ export class App {
     mainElement = document.querySelector(App.S_MAIN);
 
     // State:
+    // TODO: Create constants for all these numbers...
     coins = parseInt(localStorage.coins, 10) || 100;
-    jackpot = parseInt(localStorage.jackpot, 10) || 10000;
+    jackpot = parseInt(localStorage.jackpot, 10) || 1000;
     spins = parseInt(localStorage.spins, 10) || 0;
     lastSpin = localStorage.lastSpin || 0;
 
@@ -30,7 +31,7 @@ export class App {
         const now = Date.now();
 
         if (now - this.lastSpin >= App.ONE_DAY) {
-            localStorage.jackpot = this.jackpot = Math.max(5000, this.jackpot - 5000 + Math.random() * 10000) | 0;
+            localStorage.jackpot = this.jackpot = Math.max(500, this.jackpot - 500 + Math.random() * 1000) | 0;
             localStorage.lastSpin = now;
         }
 
@@ -50,6 +51,7 @@ export class App {
         localStorage.coins = this.coins = Math.max(this.coins - 1, 0) || 100;
         localStorage.jackpot = ++this.jackpot;
         localStorage.spins = ++this.spins;
+        localStorage.lastSpin = this.lastSpin = Date.now();
 
         this.refreshView();
     }
