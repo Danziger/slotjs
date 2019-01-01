@@ -13,6 +13,10 @@
         line-height: 16px;
     }
 
+    &__header {
+        box-shadow: 0 64px 128px -40px rgba(0, 0, 0, .25);
+    }
+
     &__title {
         padding: 24px 16px;
         margin: 0;
@@ -37,15 +41,17 @@
         box-sizing: border-box;
     }
 
+    &__prop + &__prop {
+        border-left: 1px solid #F0F0F0;
+    }
+
     &__icon {
-        padding: 8px 12px 8px 0;
+        padding: 0 12px 0 0;
     }
 
     &__value {
-        padding: 8px 12px;
-        border-radius: 2px;
         flex: 1 0 auto;
-        box-shadow: 16px 8px 32px -8px rgba(0, 0, 0, .25);
+        // box-shadow: 16px 8px 32px -8px rgba(0, 0, 0, .25);
     }
 
     &__main {
