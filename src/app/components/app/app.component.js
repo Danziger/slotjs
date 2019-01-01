@@ -54,10 +54,10 @@ export class App {
         this.refreshView();
     }
 
-    handleGetPrice(percentage) {
-        const price = Math.round(percentage * this.jackpot);
+    handleGetPrice(fixedPrize, jackpotPercentage) {
+        const price = fixedPrize + Math.round(jackpotPercentage * this.jackpot);
 
-        localStorage.jackpot = this.jackpot -= price;
+        localStorage.jackpot = this.jackpot = Math.max(this.jackpot - price, 0) || 1000;
         localStorage.coins = this.coins += price;
 
         this.refreshView();

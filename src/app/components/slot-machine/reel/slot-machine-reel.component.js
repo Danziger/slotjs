@@ -26,6 +26,7 @@ export class SlotMachineReel {
     // Config:
     index;
     alpha;
+    shadowCount;
 
     // State:
     angle = 0;
@@ -56,7 +57,8 @@ export class SlotMachineReel {
             shadowOpacityWeight = 1;
         }
 
-        const shadowCount = Math.max(2, Math.round((diameter - 0.5 - 2 * index) * Math.PI / symbols.length));
+        const shadowCount = this.shadowCount
+            = Math.max(2, Math.round((diameter - 0.5 - 2 * index) * Math.PI / symbols.length));
         const beta = 1 / shadowCount;
 
         shuffle(symbols);
@@ -89,7 +91,7 @@ export class SlotMachineReel {
     }
 
     stop(speed, deltaAlpha) {
-        const { alpha } = this;
+        const { alpha, root } = this;
         const angle = (360 - this.angle - deltaAlpha) % 360;
         const index = Math.ceil(angle / alpha);
         const stopAt = index * alpha;
@@ -102,9 +104,11 @@ export class SlotMachineReel {
             speed,
         ) * SlotMachineReel.STOP_ANIMATION_DURATION_MULTIPLIER;
 
-        this.style.animation = `${ animationName } ${ animationDuration }ms ease-out forwards`;
-        this.root.classList.add(SlotMachineReel.C_IS_STOP);
         this.stopAt = stopAt;
+        this.style.animation = `${ animationName } ${ animationDuration }ms ease-out forwards`;
+        root.classList.add(SlotMachineReel.C_IS_STOP);
+
+        return (root.children[index * this.shadowCount] || root.children[0]).innerText;
     }
 
 }

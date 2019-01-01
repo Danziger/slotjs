@@ -39,7 +39,8 @@
             "array": false
         }],
         "object-curly-newline": [2, { "multiline": true, "consistent": true }],
-        "no-param-reassign": [2, { "props": false }]
+        "no-param-reassign": [2, { "props": false }],
+        "operator-linebreak": [2, "before"]
     },
     "plugins": [
         "babel"

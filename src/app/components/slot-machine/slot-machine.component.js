@@ -53,6 +53,8 @@ export class SlotMachine {
 
     // State:
     zoomTransitionTimeoutID = null;
+    currentCombination = [];
+    currentPrize = null;
     currentReel = null;
     blipCounter = 0;
     lastUpdate = 0;
@@ -116,6 +118,8 @@ export class SlotMachine {
 
     start() {
         this.handleUseCoin();
+        this.currentCombination = [];
+        this.currentPrize = null;
         this.currentReel = 0;
         this.zoomOut();
         this.reels.forEach(reel => reel.reset());
@@ -132,10 +136,15 @@ export class SlotMachine {
         this.currentReel = null;
         this.zoomIn();
 
-        // TODO: Check win
-        // this.handleGetPrice();
+        const { currentPrize } = this;
 
-        SMSoundService.unlucky();
+        if (currentPrize) {
+            SMSoundService.win();
+
+            this.handleGetPrice(...currentPrize);
+        } else {
+            SMSoundService.unlucky();
+        }
     }
 
     tick() {
@@ -205,10 +214,44 @@ export class SlotMachine {
         const { speed } = this;
         const deltaAlpha = (performance.now() - this.lastUpdate) * speed;
 
-        this.reels[reelIndex].stop(speed, deltaAlpha);
+        this.currentCombination.push(this.reels[reelIndex].stop(speed, deltaAlpha));
+        this.checkPrize();
 
         SMSoundService.stop();
         SMVibrationService.stop();
+    }
+
+    checkPrize() {
+        const { currentReel, currentCombination, reelCount, symbols } = this;
+        const occurrencesCount = {};
+
+        let maxOccurrences = 0;
+        let lastSymbol = '';
+        let maxSymbol = '';
+        let maxPrize = 0;
+
+        for (let i = 0; i < currentReel; ++i) {
+            const symbol = currentCombination[i];
+            const occurrences = occurrencesCount[symbol] = lastSymbol === symbol ? occurrencesCount[symbol] + 1 : 1;
+
+            lastSymbol = symbol;
+
+            if (occurrences > maxOccurrences) {
+                maxOccurrences = occurrences;
+
+                const index = symbols.indexOf(symbol);
+                const maxIndex = symbols.indexOf(maxSymbol); // TODO: Calculate every time?
+
+                if (index > maxIndex) {
+                    maxSymbol = symbol;
+                    maxPrize = index + 1;
+                }
+            }
+        }
+
+        if (maxOccurrences > 2) { // TODO: Use a constant
+            this.currentPrize = [maxPrize, maxOccurrences * (maxPrize / symbols.length) / reelCount];
+        }
     }
 
     handleResize() {
