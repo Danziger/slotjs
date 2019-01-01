@@ -85,7 +85,6 @@
           user-select: none;
   max-width: 800px;
   margin: 0 auto;
-  font-weight: bold;
   font-size: 16px;
   line-height: 16px; }
 
@@ -95,6 +94,7 @@
 .app__title {
   padding: 24px 16px;
   margin: 0;
+  font-weight: bold;
   font-size: 24px;
   line-height: 24px;
   text-align: center; }
@@ -108,19 +108,23 @@
   overflow: hidden; }
 
 .app__prop {
-  padding: 16px;
   width: 33.33333333%;
   display: flex;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  padding: 8px;
+  overflow: hidden; }
 
 .app__prop + .app__prop {
   border-left: 1px solid #F0F0F0; }
 
 .app__icon {
-  padding: 0 12px 0 0; }
+  padding: 8px 16px 8px 8px; }
 
 .app__value {
-  flex: 1 0 auto; }
+  flex: 1 0 auto;
+  background: #F0F0F0;
+  border-radius: 2px;
+  padding: 8px; }
 
 .app__main {
   position: relative;
@@ -135,7 +139,10 @@
 .app__footer {
   text-align: center;
   max-width: 100vw;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 13px; }
 
 .app__link {
   padding: 16px 64px;
