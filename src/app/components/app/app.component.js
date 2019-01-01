@@ -36,13 +36,59 @@ export class App {
         }
 
         // eslint-disable-next-line no-new
-        new SlotMachine(
+        const slotMachine = new SlotMachine(
             this.mainElement,
             this.handleUseCoin.bind(this),
             this.handleGetPrice.bind(this),
             5,
             SYMBOLS_RANDOM,
         );
+
+        const originalSpeed = slotMachine.speed;
+
+        let confirmation;
+        let yes;
+        let no;
+
+        const wait = () => {
+            console.log('Ok... 👌');
+
+            setTimeout(() => {
+                console.log(confirmation);
+            }, 5000);
+        };
+
+        const cheat = () => {
+            slotMachine.speed = originalSpeed / 100;
+            confirmation = 'Ok, really... Last chance. Do yo want to go back to normal mode? 😠';
+            yes = normal; // eslint-disable-line no-use-before-define
+            no = wait;
+
+            console.log('Ok, but we are calling the cops... 🚔');
+            console.log('Do you want to stop this before it\'s too late?');
+        };
+
+        const normal = () => {
+            slotMachine.speed = originalSpeed;
+            confirmation = 'Are you sure...? Do you wanna cheat? 😏 💰';
+            yes = cheat;
+            no = wait;
+
+            console.log('Playing in normal mode.');
+            console.log('Wanna cheat? 😏');
+        };
+
+        normal();
+
+        const yesGetter = () => { yes(); };
+        const noGetter = () => { no(); };
+
+        Object.defineProperties(window, {
+            yes: { get: yesGetter },
+            no: { get: noGetter },
+            Yes: { get: yesGetter },
+            No: { get: noGetter },
+        });
 
         this.refreshView();
     }

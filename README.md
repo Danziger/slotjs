@@ -75,7 +75,7 @@ TODO
 
 - Performance improvements.
 
-- Cheat mode.
+- Implement cheat mode properly.
 
 - Rage mode.
 
