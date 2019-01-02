@@ -1,7 +1,10 @@
 {
-    "presets": [
-        "@babel/preset-env"
-    ],
+    "presets": [[
+        "@babel/preset-env", {
+          "useBuiltIns": "entry",
+          "loose": true
+        }
+    ]],
     "plugins": [
         ["@babel/plugin-proposal-class-properties", { "loose": true }]
     ]
