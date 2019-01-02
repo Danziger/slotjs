@@ -135,7 +135,6 @@ module.exports = (env, argv) => {
         },
     };
 
-
     if (PROD) {
         config.plugins.push(new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin));
     }
