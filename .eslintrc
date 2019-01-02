@@ -22,6 +22,9 @@
         "lines-between-class-members": [2, "always", {
             "exceptAfterSingleLine": true
         }],
+        "prefer-destructuring": [2, {
+            "array": false
+        }],
         "no-unused-expressions": [2, {
             "allowShortCircuit": true,
             "allowTernary": true
@@ -35,9 +38,6 @@
         "indent": [2, 4],
         "template-curly-spacing": [2, "always"],
         "linebreak-style": [2, "windows"],
-        "prefer-destructuring": [2, {
-            "array": false
-        }],
         "object-curly-newline": [2, { "multiline": true, "consistent": true }],
         "no-param-reassign": [2, { "props": false }],
         "operator-linebreak": [2, "before"]
