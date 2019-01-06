@@ -76,15 +76,25 @@ However, keep in mind this will stop working if we delete `dist`. In that case, 
 Game Ideas
 ----------
 
+### No Random
+
 Instead of generating random numbers to decide whether or not the slot machine is going to give a price, this one works in a more predictable way, where the ability of an user to stop it at the right spot actually influences their ability to get a prize, which I think is also more engaging for them. Imagine, for example, the tension when having just one symbol left to get the jackpot:
 
 <p align="center">
     <img src="https://media2.giphy.com/media/xT5LMBHU0riscTRfXO/giphy.gif?cid=3640f6095c31f9a143544144495694c3" alt="Homer Simpson playing roulette" />
 </p>
 
-We could also group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate..., making sure they are on a similar skill level, and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
 
-Also, we could use WebSockets to make them all aware of the prices others on that room are getting and have special symbols that give a random bonus: immediate prize, multipliers, slow-motion, wildcard symbol...
+# Virtual Rooms
+
+We could group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate..., making sure they are on a similar skill level, and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
+
+Also, we could use WebSockets to make them all aware of the prices others on that room are getting to keep them more engaged in the game / competition.
+
+
+### Special Symbols
+
+We could have special symbols that give a random bonus: immediate prize, multipliers, slow-motion, wildcard symbol... and use the center of the slot machine to show that.
 
 
 Implementation Details, Limitations & Possible Improvements
