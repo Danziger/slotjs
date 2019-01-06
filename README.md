@@ -84,7 +84,7 @@ Instead of generating random numbers to decide whether or not the slot machine i
 
 We could also group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate..., making sure they are on a similar skill level, and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
 
-Also, we could use WebSockets to make them all aware of the prices others on that room are getting.
+Also, we could use WebSockets to make them all aware of the prices others on that room are getting and have special symbols that give a random bonus: immediate prize, multipliers, slow-motion, wildcard symbol...
 
 
 Implementation Details, Limitations & Possible Improvements
