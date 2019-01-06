@@ -12,6 +12,7 @@
 
 <br />
 
+
 <p align="center">
     <a href="https://danziger.github.io/slotjs" target="_blank">
         <img src="./static/screenshots/slotjs.png" width="512" />
@@ -20,10 +21,13 @@
 
 <br />
 
+
 Running It (Development)
 ------------------------
 
 Take a look at `package.json`, the scripts are self-explanatory.
+
+<br />
 
 
 Deploying to GitHub Pages
@@ -72,6 +76,8 @@ Lastly, we can build or App and deploy it easily:
 
 However, keep in mind this will stop working if we delete `dist`. In that case, `git worktree list` will still show the now gone working tree in `dist`. To fix that, we simply do `git worktree prune` and create the working tree again with `git worktree add dist gh-pages`.
 
+<br />
+
 
 Game Ideas
 ----------
@@ -95,6 +101,8 @@ Also, we could use WebSockets to make them all aware of the prices others on tha
 ### Special Symbols
 
 We could have special symbols that give a random bonus: immediate prize, multipliers, slow-motion, wildcard symbol... and use the center of the slot machine to show that.
+
+<br />
 
 
 Implementation Details, Limitations & Possible Improvements
@@ -140,6 +148,13 @@ Each cell in a reel is repeated a number of times, depending on the available sp
 However, it looks like `filter: blur(Npx)` is not using the GPU on Firefox, so it causes major performance issues. Therefore, this effect is not used on Firefox, where only `opacity` is changed.
 
 
+### Cheat Mode
+
+😏
+
+<br />
+
+
 Ongoing Work (TODOs)
 --------------------
 
@@ -160,6 +175,8 @@ Ongoing Work (TODOs)
 - Create a scripts to deploy to GitHub Pages automatically.
 
 - Tests.
+
+<br />
 
 
 Author
