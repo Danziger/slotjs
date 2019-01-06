@@ -10,6 +10,8 @@
     💩 No IE or Edge.
 </p>
 
+<br />
+
 <p align="center">
     <a href="https://danziger.github.io/slotjs" target="_blank">
         <img src="./static/screenshots/slotjs.png" width="512" />
@@ -76,7 +78,9 @@ Game Ideas
 
 Instead of generating random numbers to decide whether or not the slot machine is going to give a price, this one works in a more predictable way, where the ability of an user to stop it at the right spot actually influences their ability to get a prize, which I think is also more engaging for them. Imagine, for example, the tension when having just one symbol left to get the jackpot:
 
-![Homer Simpson playing roulette](https://media2.giphy.com/media/xT5LMBHU0riscTRfXO/giphy.gif?cid=3640f6095c31f9a143544144495694c3)
+<p align="center">
+    <img src="https://media2.giphy.com/media/xT5LMBHU0riscTRfXO/giphy.gif?cid=3640f6095c31f9a143544144495694c3" alt="Homer Simpson playing roulette" />
+</p>
 
 If this was a real product, we could group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate... and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
 
@@ -90,7 +94,9 @@ Implementation Details, Limitations & Possible Improvements
 
 We could rotate the reels container (`.sm__reelsContainer`) instead of the reels themselves (`.sm__reel`) so that we only need to rotate a single element with JS + another one with a CSS animation (the one that is stopping, if any) at a time:
 
-![Homer Simpson spinning chair](https://media.giphy.com/media/qqtvGYCjDNwac/giphy.gif)
+<p align="center">
+    <img src="https://media.giphy.com/media/qqtvGYCjDNwac/giphy.gif" alt="Homer Simpson spinning chair" />
+</p>
 
 The main advantage of this approach is that the main update rotation action will have the same work to do no matter how many reels we have, potentially producing lower and more predictable execution times for the `tick` method.
 
