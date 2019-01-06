@@ -70,12 +70,12 @@ export class App {
 
         const normal = () => {
             slotMachine.speed = originalSpeed;
-            confirmation = 'Are you sure...? Do you wanna cheat? 😏 💰';
+            confirmation = 'I\'m sure you are gonna like it...? Wanna play in God mode? 😏 💰';
             yes = cheat;
             no = wait;
 
             console.log('Playing in normal mode.');
-            console.log('Wanna cheat? 😏');
+            console.log('Wanna switch to God mode? 😏');
         };
 
         normal();
