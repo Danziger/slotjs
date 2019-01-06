@@ -82,7 +82,7 @@ Instead of generating random numbers to decide whether or not the slot machine i
     <img src="https://media2.giphy.com/media/xT5LMBHU0riscTRfXO/giphy.gif?cid=3640f6095c31f9a143544144495694c3" alt="Homer Simpson playing roulette" />
 </p>
 
-If this was a real product, we could group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate... and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
+We could also group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate..., making sure they are on a similar skill level, and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
 
 Also, we could use WebSockets to make them all aware of the prices others on that room are getting.
 
