@@ -69,29 +69,30 @@
         justify-content: center;
     }
 
-    &__footer {
+    &__link {
         text-align: center;
-        max-width: 100vw;
-        box-sizing: border-box;
-        font-weight: bold;
         font-size: 13px;
         line-height: 13px;
-    }
-
-    &__link {
-        padding: 16px 64px;
-        display: inline-block;
+        border-top: 1px solid #F0F0F0;
+        padding: 16px;
+        display: block;
         text-decoration: none;
         color: black;
         text-transform: uppercase;
-        box-shadow: 0 -12px 32px -16px rgba(0, 0, 0, .25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &Icon {
+            margin-right: 8px;
+        }
 
         &Underline {
-            box-shadow: inset 0 -3px 0 0 rgba(255, 200, 0, .5);
+            box-shadow: 0 1px 0 0 #00F;
         }
 
         &:hover > &Underline {
-            box-shadow: inset 0 -3px 0 0 rgb(255, 200, 0);
+            box-shadow: 0 2px 0 0 #00F;
         }
     }
 }

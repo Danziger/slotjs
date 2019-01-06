@@ -126,9 +126,11 @@ However, it looks like `filter: blur(Npx)` is not using the GPU on Firefox, so i
 Ongoing Work (TODOs)
 --------------------
 
-- Simulate multiple players contributing to the jackpot.
+- Simulate multiple players contributing to (or getting prizes out of) the jackpot.
 
 - Highlight winning combinations.
+
+- Add pay table.
 
 - Implement cheat mode properly and link sound rate to speed.
 
