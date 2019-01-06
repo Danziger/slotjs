@@ -82,7 +82,7 @@ However, keep in mind this will stop working if we delete `dist`. In that case, 
 Game Ideas
 ----------
 
-### No Random
+### Not Random
 
 Instead of generating random numbers to decide whether or not the slot machine is going to give a price, this one works in a more predictable way, where the ability of an user to stop it at the right spot actually influences their ability to get a prize, which I think is also more engaging for them. Imagine, for example, the tension when having just one symbol left to get the jackpot:
 
