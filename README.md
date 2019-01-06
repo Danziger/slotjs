@@ -70,22 +70,69 @@ Lastly, we can build or App and deploy it easily:
 However, keep in mind this will stop working if we delete `dist`. In that case, `git worktree list` will still show the now gone working tree in `dist`. To fix that, we simply do `git worktree prune` and create the working tree again with `git worktree add dist gh-pages`.
 
 
-TODO
-----
+Game Ideas
+----------
 
-- Performance improvements.
+Instead of generating random numbers to decide whether or not the slot machine is going to give a price, this one works in a more predictable way, where the ability of an user to stop it at the right spot actually influences their ability to get a prize, which I think is also more engaging for them. Imagine, for example, the tension when having just one symbol left to get the jackpot:
 
-- Implement cheat mode properly.
+![Homer Simpson playing roulette](https://media2.giphy.com/media/xT5LMBHU0riscTRfXO/giphy.gif?cid=3640f6095c31f9a143544144495694c3)
 
-- Rage mode.
+If this was a real product, we could group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate... and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
 
-- Viewport-specific styles. See https://github.com/webpack-contrib/mini-css-extract-plugin#media-query-plugin
+Also, we could use WebSockets to make them all aware of the prices others on that room are getting.
 
-- Full-screen mode.
+
+Implementation Details, Limitations & Possible Improvements
+-----------------------------------------------------------
+
+### Group Rotation
+
+We could rotate the reels container (`.sm__reelsContainer`) instead of the reels themselves (`.sm__reel`) so that we only need to rotate a single element with JS + another one with a CSS animation (the one that is stopping, if any) at a time:
+
+![Homer Simpson spinning chair](https://media.giphy.com/media/qqtvGYCjDNwac/giphy.gif)
+
+The main advantage of this approach is that the main update rotation action will have the same work to do no matter how many reels we have, potentially producing lower and more predictable execution times for the `tick` method.
+
+However, its drawbacks are that we have less control over the rotation, while with the current approach we could have different speeds and even accelerations for each reel and, most importantly, that when we stop a reel we have to move it outside the container, changing the DOM, which would make the stop action slower.
+
+As rotating the reels is currently performing better (running at around `60 fps` even with a `6x` CPU slowdown) than stopping it (usually taking around `2` frames), mainly due to the costly `Recalculate Style` operation that the dynamically created animations trigger when a reel is stopped, I have decided not to implement this other approach. You know, _if it ain't broke..._
+
+If this game had to run with a higher number of reels and that caused performance issues on some devices, we could do a performance test to compare both approaches.
+
+
+### Rotate with Animations
+
+A rotation animation could be used instead of manually calculating the rotation, which might be slightly more performant than the current approach.
+
+However, when we stop a reel we would need to find out its angle from a rotation matrix and make sure the transition between the rotation and the stopping animations is smooth, while now we always know the current angle of all the reels. Also, we would have less control over the rotation, while with the current approach we could have different speeds and even accelerations for each reel.
+
+
+### Zoom Effect
+
+The zoom effect is a bit slow on Firefox and blurry on some iOS devices, while on Chrome the performance impact is there but it is not so noticeable. It would be simpler and way more performant in all browsers to show a bigger view of the current combination above the slot machine.
+
+Anyway, I suspect the issue on iOS is because the scaling is done with GPU but no reflow is done after that, so we get a scaled up bitmap instead of a new one generated using the scaled up application, which should look sharper, as it does in other browsers.
+
+This might be fixable using the `filter: none` or `-webkit-filter: blur(0px)` trick, but as I don' have an iOS device to test it, I didn't implement any fix.
+
+
+### Blur Effect
+
+Each cell in a reel is repeated a number of times, depending on the available space between one cell and the next one, with a blur effect and decreasing `opacity`, so that the animation looks smoother and without gaps between one cell and the next one but still makes it as obvious as possible where the real cell (the non-faded one) is.
+
+However, it looks like `filter: blur(Npx)` is not using the GPU on Firefox, so it causes major performance issues. Therefore, this effect is not used on Firefox, where only `opacity` is changed.
+
+
+Ongoing Work (TODOs)
+--------------------
+
+- Simulate multiple players contributing to the jackpot.
+
+- Highlight winning combinations.
+
+- Implement cheat mode properly and link sound rate to speed.
 
 - Service worker.
-
-- Inline App CSS (style attribute).
 
 - Allow enable/disable sound and vibration.
 
@@ -94,20 +141,6 @@ TODO
 - Create a scripts to deploy to GitHub Pages automatically.
 
 - Tests.
-
-- Make it accessible for screen readers.
-
-
-Limitations & Possible Improvements
------------------------------------
-
-- We could rotate the reels container (`.sm__activeReels`) instead of the reels themselves (`.sm__reel`) so that we only need to rotate a single element with JS + another one with a CSS animation (the one that is stopping, if any) at a time. The drawback of this approach is that we have less control over the rotation (with the current approach we could have different speeds and accelerations for each reel) and when we stop a reel, we have to move it outside the container, so we change the DOM.
-
-  We would have to do a performance test with each approach for a specific game configuration (number of reels, global VS individual speed/acceleration...).
-
-- A rotation animation could be used instead of manually calculating the rotation, but then when we stop a reel, we would need to find out its angle from a rotation matrix and make sure the transition between the rotation and the stopping animation is smooth.
-
-- Zoom effect is a bit slow on Firefox and blurry on iOS devices. It would be simpler to show a bigger view of the current combination above the slot machine.
 
 
 Author
