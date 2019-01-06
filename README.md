@@ -148,9 +148,11 @@ Each cell in a reel is repeated a number of times, depending on the available sp
 However, it looks like `filter: blur(Npx)` is not using the GPU on Firefox, so it causes major performance issues. Therefore, this effect is not used on Firefox, where only `opacity` is changed.
 
 
-### Cheat Mode
+### God Mode
 
-😏
+<p align="center">
+    <img src="https://media.giphy.com/media/3o6Mb7clwcNulOUWdO/giphy.gif" alt="Simpsons God" />
+</p>
 
 <br />
 
