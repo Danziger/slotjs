@@ -35,6 +35,7 @@
         "no-multi-assign": 0,
         "no-plusplus": 0,
         "no-bitwise": 0,
+        "no-case-declarations": 0,
         "indent": [2, 4],
         "template-curly-spacing": [2, "always"],
         "linebreak-style": [2, "windows"],
