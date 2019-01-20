@@ -30,6 +30,14 @@ Take a look at `package.json`, the scripts are self-explanatory.
 <br />
 
 
+Reporting a problem
+-------------------
+
+Don't hesitate to report any issue you find in this website/project by opening a new issue in this repository, but please make sure that problem hasn't been reported before by another user.
+
+<br />
+
+
 Game Ideas
 ----------
 
