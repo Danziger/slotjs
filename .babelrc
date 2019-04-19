@@ -2,10 +2,14 @@
     "presets": [[
         "@babel/preset-env", {
           "useBuiltIns": "usage",
-          "loose": true
+          "loose": true,
+          "modules": "auto",
+          "corejs": 3
         }
     ]],
     "plugins": [
-        ["@babel/plugin-proposal-class-properties", { "loose": true }]
+        ["@babel/plugin-proposal-class-properties", {
+            "loose": true
+        }]
     ]
 }
