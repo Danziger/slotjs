@@ -107,7 +107,7 @@ module.exports = (env, argv) => {
                     DEVELOPMENT: true,
                 },
             }),
-            new BundleAnalyzerPlugin(),
+            // new BundleAnalyzerPlugin(),
         ],
 
         optimization: {
