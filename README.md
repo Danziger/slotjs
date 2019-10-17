@@ -7,7 +7,7 @@
 </p><p align="center">
     🔊 Better with sound & vibration on.
 </p><p align="center">
-    💩 No IE or Edge.
+    💩 No IE or Edge. Get the f**k off my property!
 </p>
 
 <br />
