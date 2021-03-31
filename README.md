@@ -22,8 +22,8 @@
 <br />
 
 
-Running It (Development)
-------------------------
+Running it
+----------
 
 Take a look at `package.json`, the scripts are self-explanatory.
 
@@ -33,39 +33,22 @@ Take a look at `package.json`, the scripts are self-explanatory.
 Reporting a problem
 -------------------
 
-Don't hesitate to report any issue you find in this website/project by opening a new issue in this repository, but please make sure that problem hasn't been reported before by another user.
-
-<br />
-
-
-Game Ideas
-----------
-
-### Not Random
-
-Instead of generating random numbers to decide whether or not the slot machine is going to give a price, this one works in a more predictable way, where the ability of an user to stop it at the right spot actually influences their ability to get a prize, which I think is also more engaging for them. Imagine, for example, the tension when having just one symbol left to get the jackpot:
-
-<p align="center">
-    <img src="https://media2.giphy.com/media/xT5LMBHU0riscTRfXO/giphy.gif?cid=3640f6095c31f9a143544144495694c3" alt="Homer Simpson playing roulette" />
-</p>
-
-
-### Virtual Rooms
-
-We could group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate..., making sure they are on a similar skill level, and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
-
-Also, we could use WebSockets to make them all aware of the prices others on that room are getting to keep them more engaged in the game / competition.
-
-
-### Special Symbols
-
-We could have special symbols that give a random bonus: immediate prize, multipliers, slow-motion, wildcard symbol... and use the center of the slot machine to show that.
+Don't hesitate to report any issue you find in this website/project by opening a new issue in this repository, but please make sure that problem hasn't been reported before by another user as an Issue or already appears in the [TODO file](./TODO).
 
 <br />
 
 
 Implementation Details, Limitations & Possible Improvements
 -----------------------------------------------------------
+
+### Not Random
+
+Instead of generating random numbers to decide whether or not the slot machine is going to give a price, this one works in a more predictable way, where the ability of an user to stop it at the right spot actually influences their ability to get a prize, which I think is also more engaging and fair for them. Imagine, for example, the tension when having just one symbol left to get the jackpot, it's all on you:
+
+<p align="center">
+    <img src="https://media2.giphy.com/media/xT5LMBHU0riscTRfXO/giphy.gif?cid=3640f6095c31f9a143544144495694c3" alt="Homer Simpson playing roulette" />
+</p>
+
 
 ### Group Rotation
 
@@ -106,34 +89,31 @@ Each cell in a reel is repeated a number of times, depending on the available sp
 
 However, it looks like `filter: blur(Npx)` is not using the GPU on Firefox, so it causes major performance issues. Therefore, this effect is not used on Firefox, where only `opacity` is changed.
 
+<br />
 
-### God Mode
 
-<p align="center">
-    <img src="https://media.giphy.com/media/3o6Mb7clwcNulOUWdO/giphy.gif" alt="Simpsons God" />
-</p>
+
+Other ideas
+-----------
+
+### Special Symbols
+
+We could have special symbols that give a random bonus: immediate prize, multipliers, slow-motion, wildcard symbol... and use the center of the slot machine to show that.
+
+
+### Virtual Rooms
+
+We could group players in "virtual rooms" according to some parameters like the time the spend to stop a reel, their recent average hit rate..., making sure they are on a similar skill level, and most of the money the spend will go to that room's jackpot, while a small percentage will go for fees.
+
+Also, we could use WebSockets to make them all aware of the prices others on that room are getting to keep them more engaged in the game / competition.
 
 <br />
 
 
-Ongoing Work (TODOs)
---------------------
+Ongoing work
+------------
 
-- Simulate multiple players contributing to (or getting prizes out of) the jackpot.
-
-- Highlight winning combinations.
-
-- Add pay table.
-
-- Implement cheat mode properly and link sound rate to speed.
-
-- Service worker.
-
-- Allow enable/disable sound and vibration.
-
-- Handle code TODOs.
-
-- Tests.
+This is just a weekend project I built a while back, so it won't be updated often. However, there's some ongoing work you can find in the [TODO file](./TODO).
 
 <br />
 

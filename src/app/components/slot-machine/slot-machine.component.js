@@ -14,6 +14,8 @@ export class SlotMachine {
 
     // CSS classes:
     static C_HAS_ZOOM = 'has-zoom';
+    static C_IS_WIN = 'is-win';
+    static C_IS_FAIL = 'is-fail';
 
     // CSS selectors:
     static S_BASE = '.sm__base';
@@ -54,10 +56,12 @@ export class SlotMachine {
     // State:
     zoomTransitionTimeoutID = null;
     currentCombination = [];
-    currentPrize = null;
     currentReel = null;
     blipCounter = 0;
     lastUpdate = 0;
+    isPaused = false;
+    keydownTimeoutID = null;
+    keydownLastCalled = 0;
 
     constructor(
         wrapper,
@@ -65,14 +69,21 @@ export class SlotMachine {
         handleGetPrice,
         reelCount = 3,
         symbols = SYMBOLS_CLASSIC,
-        speed = -0.8,
+        isPaused,
+        speed = -0.552, // TODO: Make enum and match sounds too.
     ) {
         this.init(wrapper, handleUseCoin, handleGetPrice, reelCount, symbols, speed);
 
         window.onresize = this.handleResize.bind(this);
         document.onkeydown = this.handleKeyDown.bind(this);
+        document.onkeyup = this.handleKeyUp.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 
-        setGlobalClickAndTabHandler(this.handleClick.bind(this));
+        if (isPaused) {
+            this.pause();
+        } else {
+            this.resume();
+        }
     }
 
     init(
@@ -119,9 +130,9 @@ export class SlotMachine {
     start() {
         this.handleUseCoin();
         this.currentCombination = [];
-        this.currentPrize = null;
         this.currentReel = 0;
         this.zoomOut();
+        this.display.classList.remove(SlotMachine.C_IS_WIN, SlotMachine.C_IS_FAIL);
         this.reels.forEach(reel => reel.reset());
         resetAnimations();
 
@@ -133,17 +144,21 @@ export class SlotMachine {
     }
 
     stop() {
+        const currentPrize = this.checkPrize();
+
         this.currentReel = null;
         this.zoomIn();
-
-        const { currentPrize } = this;
 
         if (currentPrize) {
             SMSoundService.win();
 
-            this.handleGetPrice(...currentPrize);
+            this.display.classList.add(SlotMachine.C_IS_WIN);
+
+            this.handleGetPrice(currentPrize);
         } else {
             SMSoundService.unlucky();
+
+            this.display.classList.add(SlotMachine.C_IS_FAIL);
         }
     }
 
@@ -153,15 +168,15 @@ export class SlotMachine {
         const deltaTime = now - lastUpdate;
         const deltaAlpha = deltaTime * speed;
 
-        if (currentReel === null) {
+        console.log('tick');
+
+        if (currentReel === null || this.isPaused) {
             return;
         }
 
         const blipCounter = this.blipCounter = (this.blipCounter + 1) % SlotMachine.BLIP_RATE;
 
-        if (blipCounter === 0) {
-            SMSoundService.blip(1 - this.blipFading * currentReel);
-        }
+        if (blipCounter === 0) SMSoundService.blip(1 - this.blipFading * currentReel);
 
         this.lastUpdate = now;
 
@@ -215,14 +230,13 @@ export class SlotMachine {
         const deltaAlpha = (performance.now() - this.lastUpdate) * speed;
 
         this.currentCombination.push(this.reels[reelIndex].stop(speed, deltaAlpha));
-        this.checkPrize();
 
         SMSoundService.stop();
         SMVibrationService.stop();
     }
 
     checkPrize() {
-        const { currentReel, currentCombination, reelCount, symbols } = this;
+        const { currentCombination, reelCount, symbols } = this;
         const occurrencesCount = {};
 
         let maxOccurrences = 0;
@@ -230,7 +244,7 @@ export class SlotMachine {
         let maxSymbol = '';
         let maxPrize = 0;
 
-        for (let i = 0; i < currentReel; ++i) {
+        for (let i = 0; i < reelCount; ++i) {
             const symbol = currentCombination[i];
             const occurrences = occurrencesCount[symbol] = lastSymbol === symbol ? occurrencesCount[symbol] + 1 : 1;
 
@@ -249,9 +263,8 @@ export class SlotMachine {
             }
         }
 
-        if (maxOccurrences > 2) { // TODO: Use a constant
-            this.currentPrize = [maxPrize, maxOccurrences * (maxPrize / symbols.length) / reelCount];
-        }
+        // TODO: Use a constant for this `2`:
+        return maxOccurrences > 2 ? maxOccurrences * (maxPrize / symbols.length) / reelCount : null;
     }
 
     handleResize() {
@@ -259,14 +272,57 @@ export class SlotMachine {
     }
 
     handleKeyDown(e) {
+        window.clearTimeout(this.keydownTimeoutID);
+
         const { key } = e;
 
-        if (key === ' ' || key === 'Enter') {
+        // TODO: This should not be here:
+        // if (key === 'Esc') {
+        //     document.activeElement.blur();
+
+        //     return;
+        // }
+
+        if (this.isPaused || document.activeElement !== document || ![' ', 'Enter'].includes(key)) return;
+
+        const elapsed = Date.now() - this.keydownLastCalled;
+
+        if (elapsed >= 1000) {
             this.handleClick();
+        } else {
+            this.keydownTimeoutID = window.setTimeout(this.handleClick.bind(this), 1000 - elapsed);
         }
     }
 
-    handleClick() {
+    handleKeyUp(e) {
+        if (![' ', 'Enter'].includes(e.key)) return;
+
+        window.clearTimeout(this.keydownTimeoutID);
+
+        this.keydownLastCalled = 0;
+    }
+
+    handleClick(e = null) {
+        window.clearTimeout(this.keydownTimeoutID);
+
+        this.keydownLastCalled = Date.now();
+
+        // Keyboard events (above) will call this without passing down `e`:
+
+        if (e) {
+            const { target } = e;
+            const targetTagName = target.tagName;
+            const parentTagName = target.parentElement.tagName;
+
+            if (/^A|BUTTON$/.test(targetTagName) || /^A|BUTTON$/.test(parentTagName)) {
+                console.log('THIS IS ACTUALLY NEED FOR LINKS ONLY');
+
+                document.activeElement.blur();
+
+                return;
+            }
+        }
+
         const { currentReel } = this;
 
         if (currentReel === null) {
@@ -280,6 +336,24 @@ export class SlotMachine {
                 this.stop();
             }
         }
+    }
+
+    pause() {
+        console.log('pause');
+
+        setGlobalClickAndTabHandler(null);
+
+        this.isPaused = true;
+    }
+
+    resume() {
+        console.log('resume');
+
+        setGlobalClickAndTabHandler(this.handleClick);
+
+        this.isPaused = false;
+
+        if (this.currentReel !== null) requestAnimationFrame(() => this.tick());
     }
 
 }

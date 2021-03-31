@@ -1,0 +1,154 @@
+@import '../../styles/mixins/media-queries';
+
+@import '../../styles/utils/focus';
+
+.footer {
+    $root: &;
+
+    &__base {
+        position: relative;
+        background: #FFF;
+        z-index: 10;
+        transform: translateZ(0);
+        border-top: 1px solid #F0F0F0; // TODO: Create var
+    }
+
+    &__content {
+        max-width: 800px; // TODO: Create var
+        margin: 0 auto;
+        display: flex;
+        list-style: none;
+        padding: 0;
+    }
+
+    &__option {
+        flex: 1 0 auto;
+    }
+
+    &__optionSpacer {
+        position: relative;
+        width: 100%;
+        border-right: 1px solid #F0F0F0;
+        box-shadow: inset -1px 0 0 0 #FFF, inset 1px 0 0 0 #F0F0F0, inset 0 0 0 1px #FFF;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 4px,
+            #F0F0F0 4px,
+            #F0F0F0 5px
+        );
+    }
+
+    &__link,
+    &__button {
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 52px;
+        line-height: 32px;
+        box-sizing: border-box;
+
+        #{$focusVisible} &:focus::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            bottom: 4px;
+            left: 4px;
+            border: 1px dotted black;
+        }
+    }
+
+    &__link {
+        padding: 8px 16px 28px;
+        font-size: 9px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: black;
+
+        #{$root}__option + #{$root}__option > & {
+            border-left: 1px solid #F0F0F0;
+        }
+
+        &Icon {
+            width: 16px;
+            image-rendering: pixelated;
+            transition: transform ease-in .125s;
+
+            @include above(sm) {
+                margin-right: 16px;
+            }
+        }
+
+        &:hover > &Icon {
+            image-rendering: auto;
+            transform: scale(1.4);
+        }
+
+        &Text {
+            display: none;
+
+            @include above(sm) {
+                display: block;
+            }
+        }
+    }
+
+    &__button {
+        padding: 8px 8px 28px;
+        font-size: 16px;
+        border: 0;
+        background: transparent;
+        outline: none;
+        cursor: pointer;
+
+        &Icon {
+            transition: transform ease-in .125s;
+        }
+
+        &:hover > &Icon {
+            transform: scale(1.4);
+        }
+
+        #{$root}__option + #{$root}__option > & {
+            border-left: 1px solid #F0F0F0;
+        }
+    }
+
+    &__toggleButton {
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            width: 32px;
+            height: 4px;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            z-index: 1;
+            background: #F00;
+            background-clip: content-box;
+            box-sizing: border-box;
+            transition: padding linear .125s;
+            padding-right: 32px;
+        }
+
+        &.is-disabled {
+
+            & > #{$root}__buttonIcon {
+                filter: grayscale(1);
+            }
+
+            &::before {
+                padding-right: 0;
+            }
+        }
+    }
+
+    &__modalButton.is-open {
+        box-shadow: 0 -1px 0 0 #000;
+    }
+
+}

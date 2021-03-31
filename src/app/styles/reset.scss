@@ -1,5 +1,23 @@
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: monospace;
+    font-family: 'Press Start 2P', monospace;
+    // text-rendering: optimizeSpeed;
+}
+
+a {
+    overflow: hidden;
+    outline: none;
+}
+
+a,
+a:link,
+a:visited,
+a:active {
+    color: #000;
+    text-decoration: none;
+}
+
+[hidden] {
+    display: none !important;
 }

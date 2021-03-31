@@ -27,4 +27,13 @@ export class SoundBuffer {
         }
     }
 
+    stop() {
+        this.sounds.forEach((sound) => {
+            sound.pause();
+            sound.currentTime = 0;
+        });
+
+        this.nextSound = 0;
+    }
+
 }

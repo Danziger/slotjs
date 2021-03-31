@@ -50,14 +50,13 @@
     &__cell {
         position: absolute;
         height: var(--reelSize);
-        line-height: var(--reelSize);
+        line-height: calc(var(--reelSize) * .90);
         font-size: calc(var(--reelSize) / 2);
         top: 50%;
         left: 0;
         width: 50%;
         margin-top: calc(var(--reelSize) / -2);
         transform-origin: center right;
-        // filter: none;
 
         &--has-shadow {
             transition: opacity linear .125s;
@@ -77,28 +76,31 @@
         display: inline-block;
         text-align: center;
         width: var(--reelSize);
+        height: 100%;
     }
 
     &__display {
+        --displayShadowColor: rgba(0, 0, 0, .125);
 
         position: absolute;
         top: 50%;
         left: 0;
         width: var(--displaySize);
         height: var(--reelSize);
-        margin-top: calc(var(--reelSize) / -2);
+        transform: translate(0, -50%);
+        transition: box-shadow linear .25s, background linear .25s;
+        border-radius: 128px;
+        box-shadow: 0 0 calc(var(--shadowWeight) * var(--reelSize)) 0 var(--displayShadowColor);
+        mix-blend-mode: color;
 
-        &--background {
-            z-index: -1;
-            // Not actually used.
+        &.is-win {
+            --displayShadowColor: rgba(127, 160, 0, .5);
+            background: rgb(127, 160, 0);
         }
 
-        &--shadow {
-            border-radius: 0 0 2px 2px; // Bottom only
-            box-shadow: 0 calc(var(--reelSize) / 2)
-                calc(var(--shadowWeight) * var(--reelSize))
-                calc(var(--reelSize) / -8)
-                rgba(0,0,0,.25);
+        &.is-fail {
+            --displayShadowColor: rgba(255, 0, 0, .25);
+            background: rgb(255, 0, 0);
         }
     }
 }

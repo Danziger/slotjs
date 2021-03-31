@@ -1,4 +1,7 @@
+@import '../../styles/mixins/media-queries';
+
 .app {
+    $root: &;
 
     &__base {
         position: relative;
@@ -6,56 +9,9 @@
         flex-direction: column;
         justify-content: space-between;
         user-select: none;
-        max-width: 800px;
-        margin: 0 auto;
         font-size: 16px;
         line-height: 16px;
-    }
-
-    &__header {
-        box-shadow: 0 64px 128px -40px rgba(0, 0, 0, .25);
-    }
-
-    &__title {
-        padding: 24px 16px;
-        margin: 0;
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 24px;
-        text-align: center;
-    }
-
-    &__state {
-        margin: 0;
-        list-style: none;
-        display: flex;
-        padding: 0;
-        justify-content: center;
         overflow: hidden;
-    }
-
-    &__prop {
-        width: 33.33333333%;
-        display: flex;
-        box-sizing: border-box;
-        padding: 8px;
-        overflow: hidden;
-    }
-
-    &__prop + &__prop {
-        border-left: 1px solid #F0F0F0;
-    }
-
-    &__icon {
-        padding: 8px 16px 8px 8px;
-    }
-
-    &__value {
-        flex: 1 0 auto;
-        background: #F0F0F0;
-        border-radius: 2px;
-        padding: 8px;
-        // box-shadow: 16px 8px 32px -8px rgba(0, 0, 0, .25);
     }
 
     &__main {
@@ -63,36 +19,35 @@
         padding: 16px;
         flex: 1 0 auto;
         height: 0;
-        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    &__link {
-        text-align: center;
-        font-size: 13px;
-        line-height: 13px;
-        border-top: 1px solid #F0F0F0;
-        padding: 16px;
-        display: block;
-        text-decoration: none;
-        color: black;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    &__coverLeft,
+    &__coverRight {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        z-index: 20;
+        width: calc((100vw - 800px) / 2);
+        transform: translateZ(0);
+        display: none;
+        pointer-events: none;
 
-        &Icon {
-            margin-right: 8px;
-        }
-
-        &Underline {
-            box-shadow: 0 1px 0 0 #00F;
-        }
-
-        &:hover > &Underline {
-            box-shadow: 0 2px 0 0 #00F;
+        @include above(xl) {
+            display: block;
         }
     }
+
+    &__coverLeft {
+        left: 0;
+        background: linear-gradient(to right, #FFF 20%, rgba(255, 255, 255, 0));
+    }
+
+    &__coverRight {
+        right: 0;
+        background: linear-gradient(to left, #FFF 20%, rgba(255, 255, 255, 0));
+    }
+
 }

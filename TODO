@@ -1,0 +1,45 @@
+[x] INFORMATION & OPTIONS:
+    [x] Make header and footer responsive.
+    [x] Add attribution and GitHub link in the footer.
+    [x] Add the instructions and the pay table buttons in the footer.
+    [x] Add pay table with horizontal scroll on narrow screens.
+    [x] Allow enable/disable sound and vibration.
+    [x] Hide vibration button on desktop.
+    [x] Automatically show instructions the first time.
+    [x] Start playing automatically when closing the instructions the first time.
+    [ ] Add speed controls (and link sound rate to speed). See https://sound.stackexchange.com/questions/14906/game-sound-design-fast-repeating-guns.
+
+
+[x] TECH DEBT:
+    [x] Separate components in different files.
+    [ ] Update dependencies and setup.
+    [ ] Add support for autobind decorator and coalescence operators.
+    [ ] Add a ServiceWorker.
+    [ ] Replace listener properties with addEventListener.
+    [ ] Pass component params as options object.
+    [ ] Handle code TODOs.
+    [ ] Automatically enable/disable zoom and fix performance issue with it.
+    [ ] Show info about https://stackoverflow.com/questions/47459812/javascript-new-audio-throw-not-implemented-on-window-10-n-on-ie11-and-edge
+    [ ] Add tests.
+    [ ] Measure FPS and adjust quality/features automatically.
+
+
+[x] UI:
+    [x] Create a logo.
+    [x] Add a new Modal and ModalButton components.
+    [x] Fix shadows on Firefox looking larger.
+    [x] Highlight winning combinations (with a different shadow color).
+    [x] Focus/Hover styles for buttons, etc.
+    [ ] Adjust breakpoints when all controls are visible.
+    [ ] Disable pay table tabs/buttons if larger viewport. Use media query listener rather than resize listener.
+    [ ] Update logo to have vertical "speed" stripes.
+    [ ] Animate logo and icons when updated/hovered.
+    [ ] Show a message to non-supported browsers.
+
+
+[x] GAME FUNCTIONALITY & FEATURES:
+    [x] Prevent holding down space/enter so fast.
+    [x] Remove the focus when using the footer buttons, links or the close buttons in the modals.
+    [ ] Add support for images/sprites.
+    [ ] Improve cheat mode.
+    [ ] 3D effects/animations.

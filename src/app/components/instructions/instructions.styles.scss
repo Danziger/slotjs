@@ -1,0 +1,65 @@
+@import '../../styles/utils/focus';
+
+.instructions {
+
+    &__root,
+    &__title {
+        max-width: 480px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;;
+    }
+
+    &__root {
+        padding: 0 16px;
+    }
+
+    &__title {
+        padding: 64px 16px;
+        box-shadow: -240px 0 0 #FFF, 240px 0 0 #FFF;
+    }
+
+    &__titleIcon {
+        width: auto;
+    }
+
+    &__p {
+        margin: 0;
+        line-height: 2;
+
+        & + & {
+            margin-top: 24px;
+        }
+    }
+
+    &__symbol {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    &__button {
+        background: transparent;
+        border: 3px solid #000;
+        padding: 16px;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 16px;
+        margin-top: 64px;
+        box-shadow: 8px 8px 0 #000;
+        transition: box-shadow ease-in 100ms;
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        #{$focusVisible} &:focus {
+            border: 1px solid #000;
+            padding: 18px;
+        }
+
+        &:active {
+            box-shadow: 0 0 0 #000;
+        }
+    }
+}
