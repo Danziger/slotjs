@@ -15,9 +15,9 @@
     [ ] Update dependencies and setup.
     [ ] Add support for autobind decorator and coalescence operators.
     [ ] Add a ServiceWorker.
-    [ ] Replace listener properties with addEventListener.
-    [ ] Pass component params as options object.
-    [ ] Handle code TODOs.
+    [ ] **Replace listener properties with addEventListener.**
+    [ ] **Pass component params as options object.**
+    [ ] **Handle code TODOs.**
     [ ] Automatically enable/disable zoom and fix performance issue with it.
     [ ] Show info about https://stackoverflow.com/questions/47459812/javascript-new-audio-throw-not-implemented-on-window-10-n-on-ie11-and-edge
     [ ] Add tests.
@@ -30,9 +30,9 @@
     [x] Fix shadows on Firefox looking larger.
     [x] Highlight winning combinations (with a different shadow color).
     [x] Focus/Hover styles for buttons, etc.
-    [ ] Adjust breakpoints when all controls are visible.
-    [ ] Disable pay table tabs/buttons if larger viewport. Use media query listener rather than resize listener.
-    [ ] Update logo to have vertical "speed" stripes.
+    [ ] **Adjust breakpoints when all controls are visible.**
+    [ ] **Disable pay table tabs/buttons if larger viewport. Use media query listener rather than resize listener.**
+    [ ] **Update logo to have vertical "speed" stripes.**
     [ ] Animate logo and icons when updated/hovered.
     [ ] Show a message to non-supported browsers.
 
