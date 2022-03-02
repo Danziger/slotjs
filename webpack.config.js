@@ -73,14 +73,20 @@ module.exports = (env, argv) => {
                     'postcss-loader',
                     'sass-loader',
                 ],
+            }, {
+                test: /\.ejs$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'ejs-compiled-loader',
+                },
             }],
         },
 
         plugins: [
             new HtmlWebpackPlugin({
                 filename: path.resolve(__dirname, 'dist/index.html'),
-                template: path.resolve(__dirname, 'src/app/templates/index.html'),
-                title: 'SlotJS / Circular slot machine built with JavaScript & Emojis!',
+                template: path.resolve(__dirname, 'src/app/components/app/app.template.ejs'),
+                title: 'SlotJS \\ Circular slot machine mobile-first SPA built using JavaScript, CSS variables and Emojis!',
                 description: pkg.description,
                 favicon: path.resolve(__dirname, 'static/favicon.ico'),
                 inlineSource: '.(js|css)$', // Inline JS and CSS.

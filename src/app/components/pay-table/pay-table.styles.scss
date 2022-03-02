@@ -1,0 +1,192 @@
+@import '../../styles/mixins/media-queries';
+
+@import '../../styles/utils/focus';
+
+.pt {
+    $root: &;
+
+    &__base {
+        position: relative;
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 800px;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: calc(50% - 300px);
+            display: none;
+            z-index: 20;
+
+            @include above(md) {
+                display: block;
+            }
+        }
+
+        &::before {
+            left: 0;
+            background: linear-gradient(to right, #FFF 20%, rgba(255, 255, 255, 0));
+        }
+
+        &::after {
+            right: 0;
+            background: linear-gradient(to left, #FFF 20%, rgba(255, 255, 255, 0));
+        }
+    }
+
+    &__title {
+        margin: 0 auto;
+        padding: 64px 16px;
+        max-width: 600px;
+        box-sizing: border-box;
+        box-shadow: -300px 0 0 #FFF, 300px 0 0 #FFF;
+    }
+
+    &__titleIcon {
+        width: 48px;
+    }
+
+    &__header {
+        position: sticky;
+        top: 148px;
+        background: #FFF;
+        z-index: 10;
+        border-bottom: 1px solid #F0F0F0;
+
+        #{$root}__base--activeC2 & #{$root}__c2,
+        #{$root}__base--activeC3 & #{$root}__c3,
+        #{$root}__base--activeC4 & #{$root}__c4 {
+            font-weight: bold;
+            box-shadow: 0 1px 0 0 #000;
+
+            @include above(sm) {
+                font-weight: normal;
+                box-shadow: none;
+            }
+        }
+
+        & #{$root}__c1 {
+            display: none;
+
+            @include above(sm) {
+                display: flex;
+            }
+        }
+
+        & #{$root}__c2,
+        & #{$root}__c3,
+        & #{$root}__c4 {
+            display: flex;
+            justify-content: center;
+
+            @include above(sm) {
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    &__row {
+        border-bottom: 1px solid #F0F0F0;
+    }
+
+    &__rowContent {
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    &__tab {
+        position: relative;
+        background: transparent;
+        border: 0;
+        outline: none;
+        font-family: 'Press Start 2P', monospace;
+        cursor: pointer;
+
+        @include above(sm) {
+            cursor: default;
+        }
+
+        &Text {
+            transition: transform ease-in .125s;
+            pointer-events: none;
+        }
+
+        &:disabled {
+            color: inherit;
+        }
+
+        &:hover > &Text {
+            transform: scale(1.4);
+
+            @include above(sm) {
+                transform: none;
+            }
+        }
+
+        #{$focusVisible} &:focus::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            bottom: 4px;
+            left: 4px;
+            border: 1px dotted black;
+            display: block;
+        }
+    }
+
+    &__c1,
+    &__c2,
+    &__c3,
+    &__c4 {
+        padding: 0 8px;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        // width: 25%;
+        // box-sizing: border-box;
+    }
+
+    &__c1 {
+        display: flex;
+        font-size: 24px;
+        background: white;
+        z-index: 1;
+
+        @include above(sm) {
+            padding-left: 16px;
+            flex: 0 0 48px;
+        }
+    }
+
+    &__c2,
+    &__c3,
+    &__c4 {
+        display: none;
+
+        @include above(sm) {
+            display: flex;
+            flex: 0 1 100%;
+            justify-content: flex-end;
+        }
+    }
+
+    &__c4 {
+        @include above(sm) {
+            padding-right: 16px;
+        }
+    }
+
+    &__base--activeC2 &__c2,
+    &__base--activeC3 &__c3,
+    &__base--activeC4 &__c4 {
+        display: flex;
+    }
+}

@@ -1,0 +1,144 @@
+@import '../../styles/mixins/media-queries';
+
+@import '../../styles/utils/focus';
+
+.header {
+    $root: &;
+
+    &__base {
+        position: relative;
+        background: #FFF;
+        z-index: 10;
+        transform: translateZ(0);
+        border-bottom: 1px solid #F0F0F0; // TODO: Create var
+    }
+
+    &__content {
+        max-width: 800px; // TODO: Create var
+        margin: 0 auto;
+        display: flex;
+    }
+
+    &__title {
+        margin: 0;
+    }
+
+    &__logoLink {
+        position: relative;
+        padding: 28px 16px 8px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        overflow: visible;
+
+        #{$focusVisible} &:focus::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            bottom: 4px;
+            left: 4px;
+            border: 1px dotted black;
+        }
+    }
+
+    &__logoImage {
+        width: 32px;
+        pointer-events: none;
+        image-rendering: pixelated;
+        transition: transform ease-in .125s;
+
+        @include above(xs) {
+            margin-right: 16px;
+        }
+
+        #{$root}__logoLink:hover > & {
+            image-rendering: auto;
+            transform: scale(1.1);
+        }
+    }
+
+    &__logoText {
+        position: absolute;
+        font-size: 8px;
+        top: 8px;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        @include above(xs) {
+            position: static;
+            font-size: inherit;
+            transform: none;
+        }
+
+    }
+
+    &__state {
+        flex: 1 0 auto;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        padding: 0;
+        justify-content: flex-end;
+        overflow: hidden;
+        box-shadow: inset -1px 0 0 0 #FFF, inset 1px 0 0 0 #F0F0F0, inset 0 0 0 1px #FFF;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 4px,
+            #F0F0F0 4px,
+            #F0F0F0 5px
+        );
+    }
+
+    &__prop {
+        position: relative;
+        display: flex;
+        align-items: baseline;
+        flex: 0 1 auto;
+        display: flex;
+        box-sizing: border-box;
+        padding: 28px 8px 8px;
+        overflow: hidden;
+        max-width: 192px;
+        border-left: 1px solid #F0F0F0;
+        background: #FFF;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        font-size: 10px;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+
+
+        @include above(sm) {
+            position: static;
+            padding: 0 16px 0 8px;
+            font-size: 16px;
+            width: 20px;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &::after {
+            content: attr(aria-label);
+            margin-left: 4px;
+            font-size: 8px;
+        }
+    }
+
+    &__value {
+        flex: 1 0 auto;
+        background: #F0F0F0;
+        border-radius: 2px;
+        padding: 8px;
+        font-size: 12px;
+    }
+
+}
