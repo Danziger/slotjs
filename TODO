@@ -9,7 +9,6 @@
     [x] Start playing automatically when closing the instructions the first time.
     [ ] Add speed controls (and link sound rate to speed). See https://sound.stackexchange.com/questions/14906/game-sound-design-fast-repeating-guns.
 
-
 [x] TECH DEBT:
     [x] Separate components in different files.
     [ ] Update dependencies and setup.
@@ -30,9 +29,9 @@
     [x] Fix shadows on Firefox looking larger.
     [x] Highlight winning combinations (with a different shadow color).
     [x] Focus/Hover styles for buttons, etc.
+    [x] Update logo to have vertical "speed" stripes.
     [ ] **Adjust breakpoints when all controls are visible.**
     [ ] **Disable pay table tabs/buttons if larger viewport. Use media query listener rather than resize listener.**
-    [ ] **Update logo to have vertical "speed" stripes.**
     [ ] Animate logo and icons when updated/hovered.
     [ ] Show a message to non-supported browsers.
 

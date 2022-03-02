@@ -321,6 +321,8 @@ export class SlotMachine {
 
                 return;
             }
+
+            if (e.which === 3) return;
         }
 
         const { currentReel } = this;
