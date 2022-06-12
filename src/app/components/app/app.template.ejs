@@ -32,7 +32,7 @@
 
 <body class="app__base">
 
-    <%- include ./src/app/components/header/header.template.ejs %>
+    <%- include ../header/header.template.ejs %>
 
     <main class="app__main" id="main">
         <section class="sm__base">
@@ -53,7 +53,7 @@
             </button>
         </h2>
 
-        <%- include ./src/app/components/instructions/instructions.template.ejs %>
+        <%- include ../instructions/instructions.template.ejs %>
     </section>
 
     <section class="modal__root" id="payTableModal">
@@ -64,10 +64,10 @@
             </button>
         </h2>
 
-        <%- include ./src/app/components/pay-table/pay-table.template.ejs %>
+        <%- include ../pay-table/pay-table.template.ejs %>
     </section>
 
-    <%- include ./src/app/components/footer/footer.template.ejs %>
+    <%- include ../footer/footer.template.ejs %>
 
 </body>
 </html>

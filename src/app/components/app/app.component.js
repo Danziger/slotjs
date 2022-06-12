@@ -40,8 +40,8 @@ export class App {
     static S_TOGGLE_SOUND = '#toggleSound';
     static S_TOGGLE_VIBRATION = '#toggleVibration';
     static S_VIBRATION_INSTRUCTIONS = '#vibrationInstructions';
-    static S_INSTRUCTIONS_MODAL = '#instructionsModal'
-    static S_INSTRUCTIONS_MODAL_BUTTON = '#toggleInstructions'
+    static S_INSTRUCTIONS_MODAL = '#instructionsModal';
+    static S_INSTRUCTIONS_MODAL_BUTTON = '#toggleInstructions';
     static S_PAY_TABLE_MODAL = '#payTableModal';
     static S_PAY_TABLE_MODAL_BUTTON = '#togglePayTable';
     static S_PLAY = '#playButton';
@@ -231,13 +231,17 @@ export class App {
         // TODO: Pass params as options, except for root selector or some of the basic ones...:
 
         // Init/render instructions modal, which might be open straight away:
-        this.instructionsModal = new Modal(App.S_INSTRUCTIONS_MODAL, App.S_INSTRUCTIONS_MODAL_BUTTON,
-            'instructions', isFirstTime, isFirstTime, this.handleModalToggle);
+        this.instructionsModal = new Modal(
+            App.S_INSTRUCTIONS_MODAL,
+            App.S_INSTRUCTIONS_MODAL_BUTTON,
+            'instructions',
+            isFirstTime,
+            isFirstTime,
+            this.handleModalToggle,
+        );
 
         // Init/render slot machine symbols:
-        this.slotMachine = new SlotMachine(
-            this.mainElement, this.handleUseCoin, this.handleGetPrice, 5, SYMBOLS_RANDOM, isFirstTime,
-        );
+        this.slotMachine = new SlotMachine(this.mainElement, this.handleUseCoin, this.handleGetPrice, 5, SYMBOLS_RANDOM, isFirstTime);
 
         // Init/render pay table and pay table modal, which is always closed in the beginning:
         this.payTable = new PayTable(SYMBOLS_RANDOM);
@@ -245,8 +249,14 @@ export class App {
         // TODO: Should be disabled in the begining (or hide button):
         // TODO: Hide modals with hidden rather than is-open...
         // eslint-disable-next-line no-new
-        new Modal(App.S_PAY_TABLE_MODAL, App.S_PAY_TABLE_MODAL_BUTTON,
-            'pay-table', false, false, this.handleModalToggle);
+        new Modal(
+            App.S_PAY_TABLE_MODAL,
+            App.S_PAY_TABLE_MODAL_BUTTON,
+            'pay-table',
+            false,
+            false,
+            this.handleModalToggle,
+        );
     }
 
     initToggleButtons() {

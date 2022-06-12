@@ -133,7 +133,7 @@ export class SlotMachine {
         this.currentReel = 0;
         this.zoomOut();
         this.display.classList.remove(SlotMachine.C_IS_WIN, SlotMachine.C_IS_FAIL);
-        this.reels.forEach(reel => reel.reset());
+        this.reels.forEach((reel) => reel.reset());
         resetAnimations();
 
         SMSoundService.coin();
@@ -322,6 +322,7 @@ export class SlotMachine {
                 return;
             }
 
+            // TODO: Should be e.button instead?
             if (e.which === 3) return;
         }
 
