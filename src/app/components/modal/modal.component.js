@@ -29,7 +29,13 @@ export class Modal {
     constructor(selectorRoot, selectorButton, key, isOpen, isFixed, onModalToggled) {
         this.root = document.querySelector(selectorRoot);
         this.closeButton = this.root.querySelector(Modal.S_CLOSE_BUTTON);
-        this.modalButton = new ModalButton(selectorButton, capitalize(key), isOpen, this.handleButtonClicked.bind(this));
+
+        this.modalButton = new ModalButton(
+            selectorButton,
+            capitalize(key),
+            isOpen,
+            this.handleButtonClicked.bind(this),
+        );
 
         this.key = key;
 

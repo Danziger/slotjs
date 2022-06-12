@@ -69,7 +69,7 @@ export class SlotMachine {
         handleGetPrice,
         reelCount = 3,
         symbols = SYMBOLS_CLASSIC,
-        isPaused,
+        isPaused = false,
         speed = -0.552, // TODO: Make enum and match sounds too.
     ) {
         this.init(wrapper, handleUseCoin, handleGetPrice, reelCount, symbols, speed);
@@ -104,7 +104,7 @@ export class SlotMachine {
 
         const alpha = this.alpha = 360 / symbols.length;
         const shuffledSymbols = [...symbols];
-        const diameter = 2 * reelCount + SlotMachine.UNITS_CENTER;
+        const diameter = (2 * reelCount) + SlotMachine.UNITS_CENTER;
 
         // Sets --reelSize and --displaySize:
         this.resize();
@@ -176,7 +176,7 @@ export class SlotMachine {
 
         const blipCounter = this.blipCounter = (this.blipCounter + 1) % SlotMachine.BLIP_RATE;
 
-        if (blipCounter === 0) SMSoundService.blip(1 - this.blipFading * currentReel);
+        if (blipCounter === 0) SMSoundService.blip(1 - (this.blipFading * currentReel));
 
         this.lastUpdate = now;
 
@@ -217,7 +217,7 @@ export class SlotMachine {
         const { style } = root;
         const { offsetWidth, offsetHeight } = wrapper;
         const wrapperSize = Math.min(offsetWidth, offsetHeight) - SlotMachine.APP_PADDING;
-        const reelSize = wrapperSize / (2 * reelCount + SlotMachine.UNITS_TOTAL) | 0;
+        const reelSize = wrapperSize / ((2 * reelCount) + SlotMachine.UNITS_TOTAL) | 0;
 
         style.setProperty(SlotMachine.V_WRAPPER_SIZE, `${ wrapperSize }px`);
         style.setProperty(SlotMachine.V_REEL_SIZE, `${ reelSize }px`);

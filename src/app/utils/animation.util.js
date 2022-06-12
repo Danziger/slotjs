@@ -23,11 +23,11 @@ export function resetAnimations() {
 export function stopAtAnimation(name, start, end, alpha, speed) {
     const angles = [
         start,
-        end - alpha * 0.25,
-        end + alpha * 0.125,
-        end - alpha * 0.0625,
-        end + alpha * 0.03125,
-        end - alpha * 0.015625,
+        end - (alpha * 0.25),
+        end + (alpha * 0.125),
+        end - (alpha * 0.0625),
+        end + (alpha * 0.03125),
+        end - (alpha * 0.015625),
         end,
     ];
 
@@ -46,7 +46,7 @@ export function stopAtAnimation(name, start, end, alpha, speed) {
     let previousPercent = 0;
 
     const percent = time.map((t) => {
-        const p = previousPercent + 100 * (t / total);
+        const p = previousPercent + (100 * t / total);
 
         previousPercent = p;
 

@@ -75,7 +75,7 @@ export class App {
 
         // Update jackpot randomly:
         if (now - this.lastSpin >= App.ONE_DAY) {
-            localStorage.jackpot = this.jackpot = Math.max(500, this.jackpot - 500 + Math.random() * 1000) | 0;
+            localStorage.jackpot = this.jackpot = Math.max(500, this.jackpot - 500 + (Math.random() * 1000)) | 0;
             localStorage.lastSpin = now;
         }
 
@@ -241,7 +241,14 @@ export class App {
         );
 
         // Init/render slot machine symbols:
-        this.slotMachine = new SlotMachine(this.mainElement, this.handleUseCoin, this.handleGetPrice, 5, SYMBOLS_RANDOM, isFirstTime);
+        this.slotMachine = new SlotMachine(
+            this.mainElement,
+            this.handleUseCoin,
+            this.handleGetPrice,
+            5,
+            SYMBOLS_RANDOM,
+            isFirstTime,
+        );
 
         // Init/render pay table and pay table modal, which is always closed in the beginning:
         this.payTable = new PayTable(SYMBOLS_RANDOM);
