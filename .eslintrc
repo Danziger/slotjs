@@ -1,7 +1,8 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "extends": "airbnb-base",
     "rules":{
+        "no-use-before-define": 1,
         "import/prefer-default-export": [0],
         "import/order": [2, {
             "groups": ["builtin", "external", "parent", "sibling", "index"],
@@ -15,10 +16,8 @@
         "padded-blocks": [2, {
             "classes": "always"
         }],
-        "max-len": [2, {
-            "code":  120,
-            "ignoreTemplateLiterals": true
-        }],
+        "max-len": [2, { "code": 160, "ignorePattern": "^(import|export) .*", "ignoreRegExpLiterals": true, "ignoreStrings": true }],
+        "no-mixed-operators": [2, { "allowSamePrecedence": true }],
         "lines-between-class-members": [2, "always", {
             "exceptAfterSingleLine": true
         }],

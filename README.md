@@ -15,7 +15,7 @@
 
 <p align="center">
     <a href="https://danziger.github.io/slotjs" target="_blank">
-        <img src="./static/screenshots/slotjs.png" width="512" />
+        <img src="./static/screenshots/slotjs.png" />
     </a>
 </p>
 

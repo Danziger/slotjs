@@ -1,5 +1,4 @@
 .sm {
-
     &__base {
         --wrapperSize: 100%;
         --reelSize: 32px;
@@ -31,14 +30,14 @@
         --bg: transparent;
 
         position: absolute;
-        top: calc( var(--index) * var(--reelSize));
-        left: calc( var(--index) * var(--reelSize));
+        top: calc(var(--index) * var(--reelSize));
+        left: calc(var(--index) * var(--reelSize));
         width: calc(100% - var(--index) * 2 * var(--reelSize));
         height: calc(100% - var(--index) * 2 * var(--reelSize));
         background: var(--bg);
         border-radius: 100%;
         overflow: hidden;
-        box-shadow: 0 0 calc(var(--shadowWeight) * var(--reelSize)) 0 rgba(0,0,0,.125);
+        box-shadow: 0 0 calc(var(--shadowWeight) * var(--reelSize)) 0 rgba(0, 0, 0, 0.125);
         will-change: transform;
 
         &:first-child,
@@ -50,7 +49,7 @@
     &__cell {
         position: absolute;
         height: var(--reelSize);
-        line-height: calc(var(--reelSize) * .90);
+        line-height: calc(var(--reelSize) * 0.9);
         font-size: calc(var(--reelSize) / 2);
         top: 50%;
         left: 0;
@@ -59,7 +58,7 @@
         transform-origin: center right;
 
         &--has-shadow {
-            transition: opacity linear .125s;
+            transition: opacity linear 0.125s;
 
             .is-stop & {
                 opacity: 0 !important;
@@ -80,7 +79,7 @@
     }
 
     &__display {
-        --displayShadowColor: rgba(0, 0, 0, .125);
+        --displayShadowColor: rgba(0, 0, 0, 0.125);
 
         position: absolute;
         top: 50%;
@@ -88,18 +87,20 @@
         width: var(--displaySize);
         height: var(--reelSize);
         transform: translate(0, -50%);
-        transition: box-shadow linear .25s, background linear .25s;
+        transition: box-shadow linear 0.25s, background linear 0.25s;
         border-radius: 128px;
         box-shadow: 0 0 calc(var(--shadowWeight) * var(--reelSize)) 0 var(--displayShadowColor);
         mix-blend-mode: color;
 
         &.is-win {
-            --displayShadowColor: rgba(127, 160, 0, .5);
+            --displayShadowColor: rgba(127, 160, 0, 0.5);
+
             background: rgb(127, 160, 0);
         }
 
         &.is-fail {
-            --displayShadowColor: rgba(255, 0, 0, .25);
+            --displayShadowColor: rgba(255, 0, 0, 0.25);
+
             background: rgb(255, 0, 0);
         }
     }

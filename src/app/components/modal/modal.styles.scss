@@ -1,16 +1,14 @@
 @import '../../styles/mixins/media-queries';
-
 @import '../../styles/utils/focus';
 
 .modal {
-
     &__root {
         position: fixed;
         top: 69px;
         bottom: 69px;
         left: 50%;
         width: 100%;
-        background: #FFF;
+        background: #fff;
         font-size: 12px;
         transform: translate(-50%, 0);
         box-sizing: border-box;
@@ -27,11 +25,11 @@
     }
 
     &__title {
-        position: relative;
+        // position: relative;
         font-size: 16px;
         position: sticky;
         top: 0;
-        background: #FFF;
+        background: #fff;
         z-index: 10;
     }
 
@@ -64,7 +62,7 @@
         font-family: 'Press Start 2P', monospace;
 
         &Icon {
-            transition: transform ease-in .125s;
+            transition: transform ease-in 0.125s;
         }
 
         &:hover > &Icon {

@@ -1,6 +1,7 @@
 const path = require('path');
 
 const webpack = require('webpack');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -44,22 +45,22 @@ module.exports = (env, argv) => {
         },
 
         devServer: {
-            contentBase: path.resolve(__dirname, 'static'),
-            publicPath: '/slotjs/',
+            static: {
+                directory: path.resolve(__dirname, 'static'),
+            },
+            devMiddleware: {
+                publicPath: '/slotjs/',
+            },
+            client: {
+                overlay: {
+                    warnings: false,
+                    errors: false,
+                },
+            },
         },
 
         module: {
             rules: [{
-                enforce: 'pre',
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'eslint-loader',
-                    options: {
-                        fix: true,
-                    },
-                },
-            }, {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
@@ -83,6 +84,7 @@ module.exports = (env, argv) => {
         },
 
         plugins: [
+            new ESLintPlugin({ fix: true }),
             new HtmlWebpackPlugin({
                 filename: path.resolve(__dirname, 'dist/index.html'),
                 template: path.resolve(__dirname, 'src/app/components/app/app.template.ejs'),
@@ -102,12 +104,14 @@ module.exports = (env, argv) => {
                 filename: '[name].css',
             }),
             new StyleLintPlugin({
-                syntax: 'scss',
+                // syntax: 'scss',
                 fix: true,
             }),
-            new CopyWebpackPlugin([{
-                from: 'static',
-            }]),
+            new CopyWebpackPlugin({
+                patterns: [{
+                    from: 'static',
+                }],
+            }),
             new webpack.DefinePlugin({
                 'process.env': {
                     DEVELOPMENT: true,

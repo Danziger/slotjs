@@ -57,8 +57,7 @@ export class SlotMachineReel {
             shadowOpacityWeight = 1;
         }
 
-        const shadowCount = this.shadowCount
-            = Math.max(2, Math.round((diameter - 0.5 - 2 * index) * Math.PI / symbols.length));
+        const shadowCount = this.shadowCount = Math.max(2, Math.round((diameter - 0.5 - (2 * index)) * Math.PI / symbols.length));
         const beta = 1 / shadowCount;
 
         shuffle(symbols);
@@ -73,8 +72,8 @@ export class SlotMachineReel {
                 root.appendChild(createElement(
                     cellShadowClasses,
                     cellFigure.cloneNode(true),
-                    alpha * (symbolIndex + beta * shadowIndex),
-                    `opacity: ${ shadowOpacityWeight * (1 - beta * shadowIndex) }; `,
+                    alpha * (symbolIndex + (beta * shadowIndex)),
+                    `opacity: ${ shadowOpacityWeight * (1 - (beta * shadowIndex)) }; `,
                 ));
             }
         });
