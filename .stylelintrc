@@ -1,10 +1,16 @@
 {
-    "extends": "stylelint-config-airbnb",
+    "extends": "stylelint-config-standard-scss",
     "rules": {
         "indentation": 4,
         "max-nesting-depth": 4,
         "selector-max-id": 1,
         "comment-empty-line-before": "never",
-        "string-quotes": "single"
+        "string-quotes": "single",
+        "color-function-notation": "legacy",
+        "custom-property-pattern": "^[a-z][a-zA-Z0-9]*$",
+        "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]*$",
+        "alpha-value-notation": "number",
+        "scss/comment-no-empty": null,
+        "scss/no-global-function-names": null
     }
 }

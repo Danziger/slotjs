@@ -1,13 +1,12 @@
 @import '../../styles/utils/focus';
 
 .instructions {
-
     &__root,
     &__title {
         max-width: 480px;
         width: 100%;
         margin: 0 auto;
-        box-sizing: border-box;;
+        box-sizing: border-box;
     }
 
     &__root {
@@ -16,7 +15,7 @@
 
     &__title {
         padding: 64px 16px;
-        box-shadow: -240px 0 0 #FFF, 240px 0 0 #FFF;
+        box-shadow: -240px 0 0 #fff, 240px 0 0 #fff;
     }
 
     &__titleIcon {

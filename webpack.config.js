@@ -51,6 +51,12 @@ module.exports = (env, argv) => {
             devMiddleware: {
                 publicPath: '/slotjs/',
             },
+            client: {
+                overlay: {
+                    warnings: false,
+                    errors: false,
+                },
+            },
         },
 
         module: {
@@ -98,7 +104,7 @@ module.exports = (env, argv) => {
                 filename: '[name].css',
             }),
             new StyleLintPlugin({
-                syntax: 'scss',
+                // syntax: 'scss',
                 fix: true,
             }),
             new CopyWebpackPlugin({

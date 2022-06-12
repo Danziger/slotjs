@@ -1,5 +1,4 @@
 @import '../../styles/mixins/media-queries';
-
 @import '../../styles/utils/focus';
 
 .header {
@@ -7,10 +6,10 @@
 
     &__base {
         position: relative;
-        background: #FFF;
+        background: #fff;
         z-index: 10;
         transform: translateZ(0);
-        border-bottom: 1px solid #F0F0F0; // TODO: Create var
+        border-bottom: 1px solid #f0f0f0; // TODO: Create var
     }
 
     &__content {
@@ -46,7 +45,7 @@
         width: 32px;
         pointer-events: none;
         image-rendering: pixelated;
-        transition: transform ease-in .125s;
+        transition: transform ease-in 0.125s;
 
         @include above(xs) {
             margin-right: 16px;
@@ -70,7 +69,6 @@
             font-size: inherit;
             transform: none;
         }
-
     }
 
     &__state {
@@ -81,19 +79,19 @@
         padding: 0;
         justify-content: flex-end;
         overflow: hidden;
-        box-shadow: inset -1px 0 0 0 #FFF, inset 1px 0 0 0 #F0F0F0, inset 0 0 0 1px #FFF;
-        background: repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 4px,
-            #F0F0F0 4px,
-            #F0F0F0 5px
-        );
+        box-shadow: inset -1px 0 0 0 #fff, inset 1px 0 0 0 #f0f0f0, inset 0 0 0 1px #fff;
+        background:
+            repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 4px,
+                #f0f0f0 4px,
+                #f0f0f0 5px
+            );
     }
 
     &__prop {
         position: relative;
-        display: flex;
         align-items: baseline;
         flex: 0 1 auto;
         display: flex;
@@ -101,8 +99,8 @@
         padding: 28px 8px 8px;
         overflow: hidden;
         max-width: 192px;
-        border-left: 1px solid #F0F0F0;
-        background: #FFF;
+        border-left: 1px solid #f0f0f0;
+        background: #fff;
     }
 
     &__icon {
@@ -113,7 +111,6 @@
         display: flex;
         align-items: baseline;
         justify-content: center;
-
 
         @include above(sm) {
             position: static;
@@ -135,10 +132,9 @@
 
     &__value {
         flex: 1 0 auto;
-        background: #F0F0F0;
+        background: #f0f0f0;
         border-radius: 2px;
         padding: 8px;
         font-size: 12px;
     }
-
 }

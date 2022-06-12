@@ -1,5 +1,4 @@
 @import '../../styles/mixins/media-queries';
-
 @import '../../styles/utils/focus';
 
 .pt {
@@ -29,12 +28,12 @@
 
         &::before {
             left: 0;
-            background: linear-gradient(to right, #FFF 20%, rgba(255, 255, 255, 0));
+            background: linear-gradient(to right, #fff 20%, rgba(255, 255, 255, 0));
         }
 
         &::after {
             right: 0;
-            background: linear-gradient(to left, #FFF 20%, rgba(255, 255, 255, 0));
+            background: linear-gradient(to left, #fff 20%, rgba(255, 255, 255, 0));
         }
     }
 
@@ -43,7 +42,7 @@
         padding: 64px 16px;
         max-width: 600px;
         box-sizing: border-box;
-        box-shadow: -300px 0 0 #FFF, 300px 0 0 #FFF;
+        box-shadow: -300px 0 0 #fff, 300px 0 0 #fff;
     }
 
     &__titleIcon {
@@ -53,9 +52,9 @@
     &__header {
         position: sticky;
         top: 148px;
-        background: #FFF;
+        background: #fff;
         z-index: 10;
-        border-bottom: 1px solid #F0F0F0;
+        border-bottom: 1px solid #f0f0f0;
 
         #{$root}__base--activeC2 & #{$root}__c2,
         #{$root}__base--activeC3 & #{$root}__c3,
@@ -90,7 +89,7 @@
     }
 
     &__row {
-        border-bottom: 1px solid #F0F0F0;
+        border-bottom: 1px solid #f0f0f0;
     }
 
     &__rowContent {
@@ -113,7 +112,7 @@
         }
 
         &Text {
-            transition: transform ease-in .125s;
+            transition: transform ease-in 0.125s;
             pointer-events: none;
         }
 
@@ -150,6 +149,7 @@
         align-items: center;
         justify-content: center;
         width: 100%;
+
         // width: 25%;
         // box-sizing: border-box;
     }

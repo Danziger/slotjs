@@ -42,12 +42,11 @@
 
     &__coverLeft {
         left: 0;
-        background: linear-gradient(to right, #FFF 20%, rgba(255, 255, 255, 0));
+        background: linear-gradient(to right, #fff 20%, rgba(255, 255, 255, 0));
     }
 
     &__coverRight {
         right: 0;
-        background: linear-gradient(to left, #FFF 20%, rgba(255, 255, 255, 0));
+        background: linear-gradient(to left, #fff 20%, rgba(255, 255, 255, 0));
     }
-
 }

@@ -1,5 +1,4 @@
 @import '../../styles/mixins/media-queries';
-
 @import '../../styles/utils/focus';
 
 .footer {
@@ -7,10 +6,10 @@
 
     &__base {
         position: relative;
-        background: #FFF;
+        background: #fff;
         z-index: 10;
         transform: translateZ(0);
-        border-top: 1px solid #F0F0F0; // TODO: Create var
+        border-top: 1px solid #f0f0f0; // TODO: Create var
     }
 
     &__content {
@@ -28,15 +27,16 @@
     &__optionSpacer {
         position: relative;
         width: 100%;
-        border-right: 1px solid #F0F0F0;
-        box-shadow: inset -1px 0 0 0 #FFF, inset 1px 0 0 0 #F0F0F0, inset 0 0 0 1px #FFF;
-        background: repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 4px,
-            #F0F0F0 4px,
-            #F0F0F0 5px
-        );
+        border-right: 1px solid #f0f0f0;
+        box-shadow: inset -1px 0 0 0 #fff, inset 1px 0 0 0 #f0f0f0, inset 0 0 0 1px #fff;
+        background:
+            repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 4px,
+                #f0f0f0 4px,
+                #f0f0f0 5px
+            );
     }
 
     &__link,
@@ -69,13 +69,13 @@
         color: black;
 
         #{$root}__option + #{$root}__option > & {
-            border-left: 1px solid #F0F0F0;
+            border-left: 1px solid #f0f0f0;
         }
 
         &Icon {
             width: 16px;
             image-rendering: pixelated;
-            transition: transform ease-in .125s;
+            transition: transform ease-in 0.125s;
 
             @include above(sm) {
                 margin-right: 16px;
@@ -105,7 +105,7 @@
         cursor: pointer;
 
         &Icon {
-            transition: transform ease-in .125s;
+            transition: transform ease-in 0.125s;
         }
 
         &:hover > &Icon {
@@ -113,12 +113,11 @@
         }
 
         #{$root}__option + #{$root}__option > & {
-            border-left: 1px solid #F0F0F0;
+            border-left: 1px solid #f0f0f0;
         }
     }
 
     &__toggleButton {
-
         &::before {
             content: '';
             position: absolute;
@@ -128,10 +127,10 @@
             height: 4px;
             transform: translate(-50%, -50%) rotate(-45deg);
             z-index: 1;
-            background: #F00;
+            background: #f00;
             background-clip: content-box;
             box-sizing: border-box;
-            transition: padding linear .125s;
+            transition: padding linear 0.125s;
             padding-right: 32px;
         }
 
@@ -150,5 +149,4 @@
     &__modalButton.is-open {
         box-shadow: 0 -1px 0 0 #000;
     }
-
 }
