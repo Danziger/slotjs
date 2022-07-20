@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
     const PROD = argv.mode === 'production';
 
     const config = {
-        devtool: DEV ? 'eval-source-map' : false,
+        devtool: DEV ? 'eval-source-map' : 'source-map',
 
         entry: {
             main: [
@@ -49,6 +49,8 @@ module.exports = (env, argv) => {
             },
             devMiddleware: {
                 publicPath: '/slotjs/',
+                // When sharing the site using ssh -R 80:localhost:8080 ssh.localhost.run
+                // disableHostCheck: true,
             },
             client: {
                 overlay: {
