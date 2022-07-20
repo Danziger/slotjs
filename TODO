@@ -7,7 +7,7 @@
     [x] Hide vibration button on desktop.
     [x] Automatically show instructions the first time.
     [x] Start playing automatically when closing the instructions the first time.
-    [ ] Add speed controls (and link sound rate to speed). See https://sound.stackexchange.com/questions/14906/game-sound-design-fast-repeating-guns, https://stackoverflow.com/questions/60222074/how-i-can-merge-two-audio-files-javascript
+    [ ] Add speed controls (and link sound rate to speed, using the WebAudio API probably). See https://sound.stackexchange.com/questions/14906/game-sound-design-fast-repeating-guns, https://stackoverflow.com/questions/60222074/how-i-can-merge-two-audio-files-javascript
 
 [x] TECH DEBT:
     [x] Separate components in different files.
