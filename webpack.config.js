@@ -1,6 +1,5 @@
 const path = require('path');
 
-const webpack = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -38,7 +37,7 @@ module.exports = (env, argv) => {
         */
 
         output: {
-            filename: '[name].js',
+            filename: PROD ? '[name].[contenthash].js' : '[name].[fullhash].js',
             path: path.resolve(__dirname, 'dist'),
             publicPath: './',
         },
@@ -86,6 +85,7 @@ module.exports = (env, argv) => {
 
         plugins: [
             new ESLintPlugin({ fix: true }),
+
             new HtmlWebpackPlugin({
                 filename: path.resolve(__dirname, 'dist/index.html'),
                 template: path.resolve(__dirname, 'src/app/components/app/app.template.ejs'),
@@ -101,23 +101,31 @@ module.exports = (env, argv) => {
                 },
                 // We can use templateParameters if more options are required, but it will override all the above.
             }),
+
             new MiniCssExtractPlugin({
-                filename: '[name].css',
+                filename: PROD ? '[name].[contenthash].css' : '[name].[fullhash].css',
             }),
+
             new StyleLintPlugin({
-                // syntax: 'scss',
                 fix: true,
             }),
+
             new CopyWebpackPlugin({
                 patterns: [{
                     from: 'static',
                 }],
             }),
-            new webpack.DefinePlugin({
-                'process.env': {
-                    DEVELOPMENT: true,
-                },
-            }),
+
+            // new webpack.DefinePlugin({
+            //     'process.env': {},
+            // }),
+
+            // Same as before, but sets properties inside `process.env` specifically:
+            // new webpack.EnvironmentPlugin({
+            //     DEV,
+            //     PROD,
+            // }),
+
             // new BundleAnalyzerPlugin(),
         ],
 

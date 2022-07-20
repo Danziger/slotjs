@@ -11,6 +11,8 @@
         "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]*$",
         "alpha-value-notation": "number",
         "scss/comment-no-empty": null,
-        "scss/no-global-function-names": null
+        "scss/no-global-function-names": null,
+        "max-line-length": 160,
+        "no-descending-specificity": null
     }
 }
