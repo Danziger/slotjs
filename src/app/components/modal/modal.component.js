@@ -80,8 +80,6 @@ export class Modal {
     }
 
     handleClickOutside({ target }) {
-        console.log('handleClickOutside', target);
-
         if (this.isFixed || target === this.root || this.root.contains(target)) return;
 
         this.close('outside');

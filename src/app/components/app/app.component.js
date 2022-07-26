@@ -87,8 +87,6 @@ export class App {
         let focusActive = false;
 
         document.addEventListener('keydown', (e) => {
-            console.log(e.key);
-
             if (e.key === 'Tab' && !focusActive) {
                 focusActive = true;
                 document.body.classList.add(App.C_FOCUS_ACTIVE);
@@ -277,13 +275,7 @@ export class App {
     }
 
     handleModalToggle(isOpen, key) {
-        console.log('handleModalToggle', isOpen, key);
-
-        if (!this.slotMachine || key.includes('-init')) {
-            console.log('!slotMachine...');
-
-            return;
-        }
+        if (!this.slotMachine || key.includes('-init')) return;
 
         if (isOpen) {
             this.slotMachine.pause();

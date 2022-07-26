@@ -168,8 +168,6 @@ export class SlotMachine {
         const deltaTime = now - lastUpdate;
         const deltaAlpha = deltaTime * speed;
 
-        console.log('tick');
-
         if (currentReel === null || this.isPaused) {
             return;
         }
@@ -218,6 +216,12 @@ export class SlotMachine {
         const { offsetWidth, offsetHeight } = wrapper;
         const wrapperSize = Math.min(offsetWidth, offsetHeight) - SlotMachine.APP_PADDING;
         const reelSize = wrapperSize / ((2 * reelCount) + SlotMachine.UNITS_TOTAL) | 0;
+
+        if (wrapperSize <= 0 || reelSize <= 0 || root.offsetWidth / display.offsetWidth <= 0) {
+            requestAnimationFrame(() => this.resize());
+
+            return;
+        }
 
         style.setProperty(SlotMachine.V_WRAPPER_SIZE, `${ wrapperSize }px`);
         style.setProperty(SlotMachine.V_REEL_SIZE, `${ reelSize }px`);
@@ -315,7 +319,7 @@ export class SlotMachine {
             const parentTagName = target.parentElement.tagName;
 
             if (/^A|BUTTON$/.test(targetTagName) || /^A|BUTTON$/.test(parentTagName)) {
-                console.log('THIS IS ACTUALLY NEED FOR LINKS ONLY');
+                // TODO: This is only needed for links.
 
                 document.activeElement.blur();
 
@@ -342,16 +346,12 @@ export class SlotMachine {
     }
 
     pause() {
-        console.log('pause');
-
         setGlobalClickAndTabHandler(null);
 
         this.isPaused = true;
     }
 
     resume() {
-        console.log('resume');
-
         setGlobalClickAndTabHandler(this.handleClick);
 
         this.isPaused = false;
