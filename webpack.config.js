@@ -103,7 +103,6 @@ module.exports = (env, {
                 meta: {
                     author: pkg.author.name,
                     description: pkg.description,
-                    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
                 },
                 // We can use templateParameters if more options are required, but it will override all the above.
             }),

@@ -3,16 +3,16 @@
 <html lang="en">
 
 <head>
-
     <meta charSet="UTF-8" />
 
     <title><%= htmlWebpackPlugin.options.title %></title>
 
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="<%= htmlWebpackPlugin.options.title %>" />
     <meta property="og:description" content="<%= htmlWebpackPlugin.options.description %>" />
     <meta property="og:image" content="https://danziger.github.io/slotjs/screenshots/slotjs.png" />
-    <meta property="og:image:width" content="1280" />
-    <meta property="og:image:height" content="640" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="971" />
     <meta property="og:image:alt" content="<%= htmlWebpackPlugin.options.title %>" />
     <meta property="og:url" content="https://danziger.github.io/slotjs/" />
 
@@ -25,19 +25,63 @@
 
     <meta name="title" content="<%= htmlWebpackPlugin.options.title %>" />
     <meta name="description" content="<%= htmlWebpackPlugin.options.description %>" />
+    <meta name="author" content="Dani Gámez Franco" />
     <meta name="keywords" content="slot machine, game, gambling, frontend, experiment" />
     <meta name="screen-orientation" content="portrait" />
-    <meta name="theme-color" content="#FFFFFF" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" />
-
     <link rel="canonical" href="https://danziger.github.io/slotjs/" />
+
+
+    <!-- PWA -->
+
+    <meta name="theme-color" content="white" />
+    <!-- <link rel="manifest" href="manifest.json" /> -->
+
+
+    <!-- ICONS -->
+
+    <!--
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+    <link rel="icon" href="logo/gmzcodes-t-e-16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="logo/gmzcodes-t-e-32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="logo/gmzcodes-t-e-48.png" type="image/png" sizes="48x48">
+    <link rel="icon" href="logo/gmzcodes-t-e-64.png" type="image/png" sizes="64x64">
+    <link rel="icon" href="logo/gmzcodes-t-e-96.png" type="image/png" sizes="96x96">
+    <link rel="icon" href="logo/gmzcodes-t-e-128.png" type="image/png" sizes="128x128">
+    <link rel="icon" href="logo/gmzcodes-t-e-192.png" type="image/png" sizes="192x192">
+    <link rel="icon" href="logo/gmzcodes-t-e-256.png" type="image/png" sizes="256x256">
+    <link rel="icon" href="logo/gmzcodes-t-e-512.png" type="image/png" sizes="512x512">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="logo/gmzcodes-s-e-57.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="logo/gmzcodes-s-e-76.png">
+    <link rel="apple-touch-icon" sizes="112x112" href="logo/gmzcodes-s-e-112.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="logo/gmzcodes-s-e-120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="logo/gmzcodes-s-e-144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="logo/gmzcodes-s-e-152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="logo/gmzcodes-s-e-167.png">
+    <link rel="apple-touch-icon" sizes="176x176" href="logo/gmzcodes-s-e-176.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo/gmzcodes-s-e-180.png">
+    -->
 
     <!-- ANALYTICS & SITE VERIFICATION -->
 
     <meta name="google-site-verification" content="6Xa2p_VrmGSIQeZNe8Qd3qnNgE3hIlH2wIhjX0DQYJ4" />
+    <!-- <meta name="msvalidate.01" content="..." /> -->
     <script defer data-domain="danziger.github.io/slotjs" src="https://plausible.io/js/plausible.js"></script>
+
+
+    <!-- FONTS -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" media="print" onload="this.media='all'" />
+
+
+    <!-- JSON-LD -->
+
+    <!-- <script type="application/ld+json"></script> -->
 
 </head>
 
