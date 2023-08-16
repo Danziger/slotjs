@@ -7,12 +7,15 @@
         "comment-empty-line-before": "never",
         "string-quotes": "single",
         "color-function-notation": "legacy",
-        "custom-property-pattern": "^[a-z][a-zA-Z0-9]*$",
-        "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]*$",
+        "custom-property-pattern": null,
+        "scss/dollar-variable-pattern": null,
         "alpha-value-notation": "number",
         "scss/comment-no-empty": null,
         "scss/no-global-function-names": null,
         "max-line-length": 160,
-        "no-descending-specificity": null
+        "no-descending-specificity": null,
+        "selector-class-pattern": null,
+        "number-max-precision": null,
+        "block-no-empty": null
     }
 }

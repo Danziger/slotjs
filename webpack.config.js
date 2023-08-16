@@ -1,20 +1,26 @@
 const path = require('path');
+const childProcess = require('child_process');
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const hasha = require('hasha');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 const pkg = require('./package.json');
 
-module.exports = (env, argv) => {
-
-    const DEV = argv.mode === 'development';
-    const PROD = argv.mode === 'production';
+module.exports = (env, {
+    mode,
+}) => {
+    const DEV = /development|dev/i.test(mode);
+    const PROD = /production|prod/i.test(mode);
+    const COMMIT_HASH = childProcess.execSync('git rev-parse HEAD').toString().trim();
+    const BUILD_DATE = new Date();
 
     const config = {
         devtool: DEV ? 'eval-source-map' : 'source-map',
@@ -116,15 +122,16 @@ module.exports = (env, argv) => {
                 }],
             }),
 
-            // new webpack.DefinePlugin({
-            //     'process.env': {},
-            // }),
+            // Defines variables available globally that Webpack can evaluate in compilation time and remove dead code:
+            // new webpack.DefinePlugin({}),
 
             // Same as before, but sets properties inside `process.env` specifically:
-            // new webpack.EnvironmentPlugin({
-            //     DEV,
-            //     PROD,
-            // }),
+            new webpack.EnvironmentPlugin({
+                DEV,
+                PROD,
+                BUILD_DATE,
+                COMMIT_HASH,
+            }),
 
             // new BundleAnalyzerPlugin(),
         ],
@@ -151,11 +158,7 @@ module.exports = (env, argv) => {
         },
     };
 
-    /*
-    if (PROD) {
-        config.plugins.push(new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin));
-    }
-    */
+    // if (PROD) {}
 
     return config;
 };

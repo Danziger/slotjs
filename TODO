@@ -11,7 +11,7 @@
 
 [x] TECH DEBT:
     [x] Separate components in different files.
-    [ ] Update dependencies and setup.
+    [x] Update dependencies and setup.
     [ ] Add support for autobind decorator and coalescence operators.
     [ ] Add a ServiceWorker.
     [ ] **Replace listener properties with addEventListener.**

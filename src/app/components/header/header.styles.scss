@@ -33,10 +33,7 @@
         #{$focusVisible} &:focus::before {
             content: '';
             position: absolute;
-            top: 4px;
-            right: 4px;
-            bottom: 4px;
-            left: 4px;
+            inset: 4px;
             border: 1px dotted black;
         }
     }

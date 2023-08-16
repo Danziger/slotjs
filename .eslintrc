@@ -1,8 +1,15 @@
 {
     "parser": "@babel/eslint-parser",
     "extends": "airbnb-base",
+    "plugins": [
+        "babel"
+    ],
+    "env": {
+        "es6": true,
+        "browser": true
+    },
     "rules":{
-        "no-use-before-define": 1,
+        "no-use-before-define": ["warn"],
         "import/prefer-default-export": [0],
         "import/order": [2, {
             "groups": ["builtin", "external", "parent", "sibling", "index"],
@@ -41,11 +48,5 @@
         "object-curly-newline": [2, { "multiline": true, "consistent": true }],
         "no-param-reassign": [2, { "props": false }],
         "operator-linebreak": [2, "before"]
-    },
-    "plugins": [
-        "babel"
-    ],
-    "env": {
-        "browser": true
     }
 }
