@@ -1,49 +1,84 @@
 import { IS_FIREFOX } from '../../../constants/browser.constants';
-import { SoundBuffer } from '../../../../common/utils/sound/sound-buffer';
+import { Sound } from '../../../../common/utils/sound/sound';
 
-const extension = IS_FIREFOX ? 'ogg' : 'mp3';
-const blipSound = new SoundBuffer(`./sounds/blip.${ extension }`, 32);
-const coinSound = new SoundBuffer(`./sounds/coin.${ extension }`);
-const stopSound = new SoundBuffer(`./sounds/stop.${ extension }`);
-const unluckySound = new SoundBuffer(`./sounds/unlucky.${ extension }`);
-const winSound = new SoundBuffer(`./sounds/win.${ extension }`);
+class SMSoundServiceClass {
 
-let isEnabled = true;
+    static EXTENSION = IS_FIREFOX ? 'ogg' : 'mp3';
 
-export const SMSoundService = {
+    blipSound = new Sound(`./sounds/blip.${ SMSoundServiceClass.EXTENSION }`);
+    coinSound = new Sound(`./sounds/coin.${ SMSoundServiceClass.EXTENSION }`);
+    stopSound = new Sound(`./sounds/stop.${ SMSoundServiceClass.EXTENSION }`);
+    unluckySound = new Sound(`./sounds/unlucky.${ SMSoundServiceClass.EXTENSION }`);
+    winSound = new Sound(`./sounds/win.${ SMSoundServiceClass.EXTENSION }`);
 
-    blip(...args) {
-        isEnabled && blipSound.play(...args);
-    },
+    soundsStatus = 'loading';
 
-    coin(...args) {
-        isEnabled && coinSound.play(...args);
-    },
+    isEnabled = false;
 
-    stop(...args) {
-        isEnabled && stopSound.play(...args);
-    },
+    constructor() {
+        this.loadSounds();
+    }
 
-    unlucky(...args) {
-        isEnabled && unluckySound.play(...args);
-    },
+    loadSounds() {
+        this.soundsStatus = 'loading';
+        this.isEnabled = false;
 
-    win(...args) {
-        isEnabled && winSound.play(...args);
-    },
+        Promise.all([
+            this.blipSound.load(),
+            this.coinSound.load(),
+            this.stopSound.load(),
+            this.unluckySound.load(),
+            this.winSound.load(),
+        ]).then(() => {
+            this.soundsStatus = 'loaded';
+            this.isEnabled = true;
+        }).catch(() => {
+            this.soundsStatus = 'error';
+            this.isEnabled = false;
+        });
+    }
 
     enable() {
-        isEnabled = true;
-    },
+        if (this.soundsStatus === 'loaded') {
+            this.isEnabled = true;
+        } else if (this.soundsStatus === 'error') {
+            this.loadSounds();
+        }
+    }
 
     disable() {
-        isEnabled = false;
+        if (this.soundsStatus !== 'loaded') return;
 
-        blipSound.stop();
-        coinSound.stop();
-        stopSound.stop();
-        unluckySound.stop();
-        winSound.stop();
-    },
+        this.isEnabled = false;
 
-};
+        this.blipSound.stop();
+        this.coinSound.stop();
+        this.stopSound.stop();
+        this.unluckySound.stop();
+        this.winSound.stop();
+    }
+
+    blip(...args) {
+        this.isEnabled && this.blipSound.play(...args);
+    }
+
+    coin(...args) {
+        this.isEnabled && this.coinSound.play(...args);
+    }
+
+    stop(...args) {
+        this.isEnabled && this.stopSound.play(...args);
+    }
+
+    unlucky(...args) {
+        this.isEnabled && this.unluckySound.play(...args);
+    }
+
+    win(...args) {
+        this.isEnabled && this.winSound.play(...args);
+    }
+
+}
+
+
+export const SMSoundService = new SMSoundServiceClass();
