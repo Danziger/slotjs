@@ -1,5 +1,5 @@
 import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
-import { HAS_TOUCH } from '../../constants/browser.constants';
+import { IS_DESKTOP } from '../../constants/browser.constants';
 import { SlotMachine } from '../slot-machine/slot-machine.component';
 import { ToggleButton } from '../toggle-button/toggle-button.component';
 import { Modal } from '../modal/modal.component';
@@ -198,7 +198,7 @@ export class App {
         // Init/render the game info at the top:
         this.refreshGameInfo();
 
-        if (!HAS_TOUCH) {
+        if (IS_DESKTOP) {
             // TODO: Move to toggle button?
             document.querySelector(App.S_TOGGLE_VIBRATION).parentElement.setAttribute('hidden', true);
             // TODO: Move to instructions modal?
@@ -268,7 +268,7 @@ export class App {
         // eslint-disable-next-line no-new
         new ToggleButton(App.S_TOGGLE_SOUND, 'sound', !this.isSoundDisabled, handleOptionChange);
 
-        if (HAS_TOUCH) {
+        if (!IS_DESKTOP) {
             // eslint-disable-next-line no-new
             new ToggleButton(App.S_TOGGLE_VIBRATION, 'vibration', !this.isVibrationDisabled, handleOptionChange);
         }
