@@ -6,8 +6,6 @@
     🚀 Try it out at <a href="https://danziger.github.io/slotjs">danziger.github.io/slotjs</a>!
 </p><p align="center">
     🔊 Better with sound & vibration on.
-</p><p align="center">
-    💩 No IE or Edge. Get the f**k off my property!
 </p>
 
 <br />
@@ -135,6 +133,10 @@ Some other sites I've built
 
   ⌨ Press any key to get the JavaScript keyboard event event key, code, which, keyCode and more properties!
 
+- **[Stars.js](https://danziger.github.io/starsjs/)**
+
+  ✨ Generate a rotating galaxy in a canvas.
+  
 - **[Job.js](https://danziger.github.io/jobjs/)**
 
   💼 Sharable image summaries for your open positions: Share your jobs as an image on LinkedIn and Instagram to get a visibility boost and more applicants!
